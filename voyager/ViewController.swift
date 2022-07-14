@@ -14,7 +14,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var imgView: UIImageView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,7 +30,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
         configuration.frameSemantics = [.smoothedSceneDepth]
         
-//        sceneView.preferredFramesPerSecond = 15
+        /// adjust frames for sceneview
+        sceneView.preferredFramesPerSecond = 15
+        
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -52,10 +53,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         let depthImgCI = CIImage(cvPixelBuffer: depthSmoothData.depthMap)
         
-        let depthImgUI = UIImage(ciImage: depthImgCI.oriented(.right))
-        imgView.image = depthImgUI
-        
-        
+        imgView.image = UIImage(ciImage: depthImgCI.oriented(.right))
     }
 }
 
