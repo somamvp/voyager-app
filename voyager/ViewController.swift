@@ -25,13 +25,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if !ARWorldTrackingConfiguration.isSupported {
+            print("AR Configuration not supported")
+            return
+        }
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
 
         configuration.frameSemantics = [.smoothedSceneDepth]
         
         /// adjust frames for sceneview
-        sceneView.preferredFramesPerSecond = 15
+//        sceneView.preferredFramesPerSecond = 15
         
         // Run the view's session
         sceneView.session.run(configuration)

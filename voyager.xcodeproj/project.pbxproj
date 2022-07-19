@@ -16,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B107ED4B288116650071DE5E /* 0715 관정1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정1.mov"; sourceTree = "<group>"; };
+		B107ED4C288116650071DE5E /* 0715 관정2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정2.mov"; sourceTree = "<group>"; };
 		B1CF4406287FAE9A0002B733 /* voyager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = voyager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1CF4409287FAE9A0002B733 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1CF440B287FAE9A0002B733 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,9 +39,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B107ED4D28811BCC0071DE5E /* ReplayData */ = {
+			isa = PBXGroup;
+			children = (
+				B107ED4B288116650071DE5E /* 0715 관정1.mov */,
+				B107ED4C288116650071DE5E /* 0715 관정2.mov */,
+			);
+			path = ReplayData;
+			sourceTree = "<group>";
+		};
 		B1CF43FD287FAE9A0002B733 = {
 			isa = PBXGroup;
 			children = (
+				B107ED4D28811BCC0071DE5E /* ReplayData */,
 				B1CF4408287FAE9A0002B733 /* voyager */,
 				B1CF4407287FAE9A0002B733 /* Products */,
 			);
@@ -346,7 +358,7 @@
 				B1CF4419287FAE9B0002B733 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B1CF441A287FAE9B0002B733 /* Build configuration list for PBXNativeTarget "voyager" */ = {
 			isa = XCConfigurationList;
@@ -355,7 +367,7 @@
 				B1CF441C287FAE9B0002B733 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
