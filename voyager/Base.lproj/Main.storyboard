@@ -27,17 +27,30 @@
                                     </imageView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEx-ev-x33">
+                                <rect key="frame" x="148" y="798" width="118.5" height="44"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Capture">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="25"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="handleCaptureButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aIh-N7-jMX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="c3j-nb-pDV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4oW-F3-yNY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JEx-ev-x33" secondAttribute="bottom" constant="20" id="9po-KU-Ucq"/>
                             <constraint firstItem="c3j-nb-pDV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lfp-w7-6jh"/>
+                            <constraint firstItem="JEx-ev-x33" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="u7E-ZQ-AYR"/>
                             <constraint firstItem="c3j-nb-pDV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uiB-fN-aQo"/>
                             <constraint firstItem="c3j-nb-pDV" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="wZP-P4-eqW"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="captureButton" destination="JEx-ev-x33" id="f0u-Kk-ew9"/>
                         <outlet property="imgView" destination="BZD-sR-NcW" id="f0l-51-jV5"/>
                         <outlet property="sceneView" destination="thz-SV-j0d" id="QlW-jX-UR2"/>
                     </connections>

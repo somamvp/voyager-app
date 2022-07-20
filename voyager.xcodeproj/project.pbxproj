@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04D593924D441940584A7964 /* Pods_voyager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F392FD73744213AF29CE1B /* Pods_voyager.framework */; };
 		B1CF440A287FAE9A0002B733 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF4409287FAE9A0002B733 /* AppDelegate.swift */; };
 		B1CF440C287FAE9A0002B733 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF440B287FAE9A0002B733 /* SceneDelegate.swift */; };
 		B1CF440E287FAE9A0002B733 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF440D287FAE9A0002B733 /* ViewController.swift */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		62F392FD73744213AF29CE1B /* Pods_voyager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_voyager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A45C0A51F67BE2A04A408B5 /* Pods-voyager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-voyager.release.xcconfig"; path = "Target Support Files/Pods-voyager/Pods-voyager.release.xcconfig"; sourceTree = "<group>"; };
 		B107ED4B288116650071DE5E /* 0715 관정1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정1.mov"; sourceTree = "<group>"; };
 		B107ED4C288116650071DE5E /* 0715 관정2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정2.mov"; sourceTree = "<group>"; };
 		B1CF4406287FAE9A0002B733 /* voyager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = voyager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,6 +29,7 @@
 		B1CF4412287FAE9B0002B733 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1CF4415287FAE9B0002B733 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1CF4417287FAE9B0002B733 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7C1925B3399987118A0E195 /* Pods-voyager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-voyager.debug.xcconfig"; path = "Target Support Files/Pods-voyager/Pods-voyager.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D593924D441940584A7964 /* Pods_voyager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +59,8 @@
 				B107ED4D28811BCC0071DE5E /* ReplayData */,
 				B1CF4408287FAE9A0002B733 /* voyager */,
 				B1CF4407287FAE9A0002B733 /* Products */,
+				DD5AADC408E156858BBFB3EC /* Pods */,
+				C51FFE389DC405B2C5419F04 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +86,23 @@
 			path = voyager;
 			sourceTree = "<group>";
 		};
+		C51FFE389DC405B2C5419F04 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				62F392FD73744213AF29CE1B /* Pods_voyager.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DD5AADC408E156858BBFB3EC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B7C1925B3399987118A0E195 /* Pods-voyager.debug.xcconfig */,
+				9A45C0A51F67BE2A04A408B5 /* Pods-voyager.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +110,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B1CF441A287FAE9B0002B733 /* Build configuration list for PBXNativeTarget "voyager" */;
 			buildPhases = (
+				FBA3728873FD26C122E149A1 /* [CP] Check Pods Manifest.lock */,
 				B1CF4402287FAE9A0002B733 /* Sources */,
 				B1CF4403287FAE9A0002B733 /* Frameworks */,
 				B1CF4404287FAE9A0002B733 /* Resources */,
+				C470A3EAAA02BFD2CEBFAC64 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,6 +170,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C470A3EAAA02BFD2CEBFAC64 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-voyager/Pods-voyager-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-voyager/Pods-voyager-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-voyager/Pods-voyager-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBA3728873FD26C122E149A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-voyager-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B1CF4402287FAE9A0002B733 /* Sources */ = {
@@ -294,6 +362,7 @@
 		};
 		B1CF441B287FAE9B0002B733 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7C1925B3399987118A0E195 /* Pods-voyager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -322,6 +391,7 @@
 		};
 		B1CF441C287FAE9B0002B733 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A45C0A51F67BE2A04A408B5 /* Pods-voyager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

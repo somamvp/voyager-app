@@ -52,7 +52,7 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <DeviceSensorReplayFileReference
-         identifier = "../../ReplayData/0715 &#x1100;&#x116a;&#x11ab;&#x110c;&#x1165;&#x11bc;1.mov">
+         identifier = "../ReplayData/0715 &#x1100;&#x116a;&#x11ab;&#x110c;&#x1165;&#x11bc;1.mov">
       </DeviceSensorReplayFileReference>
    </LaunchAction>
    <ProfileAction
