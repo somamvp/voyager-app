@@ -10,7 +10,7 @@ import SceneKit
 import ARKit
 import Toast_Swift
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, LoopClockDelegate {
     
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var imgView: UIImageView!
@@ -19,6 +19,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var arSession: ARSession!
     var depthSaver: DepthSaver!
+    
+    let fps = 10
+    lazy var loopClock: LoopClock = { LoopClock(fps: self.fps) }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         self.arSession = sceneView.session
         self.depthSaver = DepthSaver(session: self.arSession)
+        
+        loopClock.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +51,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Run the view's session
         sceneView.session.run(configuration)
         
+        loopClock.start()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,6 +59,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Pause the view's session
         sceneView.session.pause()
+        
+        loopClock.stop()
     }
     
     @IBAction func handleCaptureButton(_ sender: Any) {
@@ -64,9 +72,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    func invoke() {
+        print("loop clock invoked: \(loopClock.counter)")
+    }
+    
 }
 
-extension ViewController: ARSessionDelegate {
+extension ViewController: ARSessionDelegate, ARSCNViewDelegate {
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         
