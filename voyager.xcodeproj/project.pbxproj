@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04D593924D441940584A7964 /* Pods_voyager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F392FD73744213AF29CE1B /* Pods_voyager.framework */; };
 		B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE83288FAA95003361A8 /* DepthSaver.swift */; };
+		B12BDE86288FB6CA003361A8 /* LoopClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE85288FB6CA003361A8 /* LoopClock.swift */; };
 		B1CF440A287FAE9A0002B733 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF4409287FAE9A0002B733 /* AppDelegate.swift */; };
 		B1CF440C287FAE9A0002B733 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF440B287FAE9A0002B733 /* SceneDelegate.swift */; };
 		B1CF440E287FAE9A0002B733 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF440D287FAE9A0002B733 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 		B107ED4B288116650071DE5E /* 0715 관정1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정1.mov"; sourceTree = "<group>"; };
 		B107ED4C288116650071DE5E /* 0715 관정2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정2.mov"; sourceTree = "<group>"; };
 		B12BDE83288FAA95003361A8 /* DepthSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthSaver.swift; sourceTree = "<group>"; };
+		B12BDE85288FB6CA003361A8 /* LoopClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopClock.swift; sourceTree = "<group>"; };
 		B1CF4406287FAE9A0002B733 /* voyager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = voyager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1CF4409287FAE9A0002B733 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1CF440B287FAE9A0002B733 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				B1CF4414287FAE9B0002B733 /* LaunchScreen.storyboard */,
 				B1CF4417287FAE9B0002B733 /* Info.plist */,
 				B12BDE83288FAA95003361A8 /* DepthSaver.swift */,
+				B12BDE85288FB6CA003361A8 /* LoopClock.swift */,
 			);
 			path = voyager;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */,
 				B1CF440A287FAE9A0002B733 /* AppDelegate.swift in Sources */,
 				B1CF440C287FAE9A0002B733 /* SceneDelegate.swift in Sources */,
+				B12BDE86288FB6CA003361A8 /* LoopClock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -50,7 +50,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="captureButton" destination="JEx-ev-x33" id="f0u-Kk-ew9"/>
                         <outlet property="imgView" destination="BZD-sR-NcW" id="f0l-51-jV5"/>
                         <outlet property="sceneView" destination="thz-SV-j0d" id="QlW-jX-UR2"/>
                     </connections>
