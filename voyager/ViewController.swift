@@ -10,7 +10,7 @@ import SceneKit
 import ARKit
 import Toast_Swift
 
-class ViewController: UIViewController, LoopClockDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, LoopClockDelegate {
     
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var imgView: UIImageView!
@@ -18,6 +18,8 @@ class ViewController: UIViewController, LoopClockDelegate {
     var currentDepthMap: CVPixelBuffer?
     
     var arSession: ARSession!
+    var arReciever: ARReceiver!
+    var lastArData: ARData?
     var depthSaver: DepthSaver!
     
     let fps = 10
@@ -28,7 +30,9 @@ class ViewController: UIViewController, LoopClockDelegate {
         
         // Set the view's delegate
         sceneView.delegate = self
-        sceneView.session.delegate = self
+        
+        arReciever = ARReceiver(session: sceneView.session)
+        arReciever.delegate = self
         
         self.arSession = sceneView.session
         self.depthSaver = DepthSaver(session: self.arSession)
@@ -38,18 +42,6 @@ class ViewController: UIViewController, LoopClockDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if !ARWorldTrackingConfiguration.isSupported {
-            print("AR Configuration not supported")
-            return
-        }
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
-
-        configuration.frameSemantics = [.smoothedSceneDepth]
-        
-        // Run the view's session
-        sceneView.session.run(configuration)
         
         loopClock.start()
     }
@@ -78,15 +70,17 @@ class ViewController: UIViewController, LoopClockDelegate {
     
 }
 
-extension ViewController: ARSessionDelegate, ARSCNViewDelegate {
+extension ViewController: ARDataReceiver {
+    func onNewARData(arData: ARData) {
+        lastArData = arData
+        displayDepthImage()
+    }
     
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+    func displayDepthImage() {
         
-        guard let depthSmoothData = frame.smoothedSceneDepth else { return }
-
-        currentDepthMap = depthSmoothData.depthMap
+        guard let currentDepthMap = lastArData?.depthSmoothImage else { return }
         
-        let depthImgCI = CIImage(cvPixelBuffer: currentDepthMap!)
+        let depthImgCI = CIImage(cvPixelBuffer: currentDepthMap)
         
         imgView.image = UIImage(ciImage: depthImgCI.oriented(.right))
     }
