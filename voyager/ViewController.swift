@@ -10,7 +10,7 @@ import SceneKit
 import ARKit
 import Toast_Swift
 
-class ViewController: UIViewController, ARSCNViewDelegate, LoopClockDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var imgView: UIImageView!
@@ -24,6 +24,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, LoopClockDelegate {
     
     let fps = 10
     lazy var loopClock: LoopClock = { LoopClock(fps: self.fps) }()
+    
+    var server = Server()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,10 +66,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, LoopClockDelegate {
         }
     }
     
-    func invoke() {
-        print("loop clock invoked: \(loopClock.counter)")
-    }
-    
 }
 
 extension ViewController: ARDataReceiver {
@@ -83,6 +81,20 @@ extension ViewController: ARDataReceiver {
         let depthImgCI = CIImage(cvPixelBuffer: currentDepthMap)
         
         imgView.image = UIImage(ciImage: depthImgCI.oriented(.right))
+    }
+}
+
+extension ViewController: LoopClockDelegate {
+    
+    func invoke(counter: Int) {
+        print("loop clock invoked: \(loopClock.counter)")
+        
+        if let img = lastArData?.colorImage {
+            let uploadData = ServerImageUploadData(sequenceNo: counter, image: img)
+            server.send(imgData: uploadData)
+        } else {
+            self.view.makeToast("Unable to retrieve current RGB image!")
+        }
     }
 }
 
