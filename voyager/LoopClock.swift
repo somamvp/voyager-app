@@ -8,7 +8,7 @@
 import Foundation
 
 protocol LoopClockDelegate: AnyObject {
-    func invoke()
+    func invoke(counter: Int)
 }
 
 class LoopClock {
@@ -37,7 +37,7 @@ class LoopClock {
         self.counter = 0
         
         self.timer = Timer.scheduledTimer(withTimeInterval: timeIntervalInSeconds, repeats: true) { [weak self] timer in
-            self?.delegate?.invoke()
+            self?.delegate?.invoke(counter: counter)
             self?.counter += 1
         }
     }
