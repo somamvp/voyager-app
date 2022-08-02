@@ -25,6 +25,10 @@ struct ServerImageUploadData {
     }
 }
 
+struct ServerImageResponseRawData: Decodable {
+    let sequenceNo: Int
+}
+
 class Server {
     
     let k = K()
@@ -35,11 +39,12 @@ class Server {
         self.serverURI = URL(string: k.serverURI)
         self.serverImageUploadURI = serverURI?.appendingPathComponent(k.serverImageUploadEndpoint)
         if serverURI != nil, serverImageUploadURI != nil {
-            print("server uri not constructed")
+            print("server uri constructed")
         }
     }
     
     func send(imgData: ServerImageUploadData) {
+        print("sending image to server")
         
         let parameters: [String: Any] = [
             "filename": imgData.filename,
@@ -53,24 +58,9 @@ class Server {
             
             multipartFormData.append(imgData.imageData!, withName: "img", fileName: imgData.filename, mimeType: "image/jpg")
                 
-        }, to: serverImageUploadURI!)
-        
-//        .responseDecodable(of: ImagePostResponseRawData.self) { response in
-//            let diff = Double(mach_absolute_time() - tick) * Double(info.numer) / Double(info.denom)
-//            print("response recieved: \(sequenceNo)")
-//            print("\(diff / 1_000_000) milliseconds")
-//
-//            let response = ImagePostResponseData(response: response, timeInNano: diff)
-//            self.postResponses.append(response)
-//
-//            if !async {
-//                if sequenceNo < self.numTrial {
-//                    self.postImageData(filename: filename, imgData: imgData, sequenceNo: sequenceNo + 1, async: false)
-//                } else {
-//                    self.showResult()
-//                }
-//            }
-//        }
+        }, to: serverImageUploadURI!).responseDecodable(of: ServerImageResponseRawData.self) { response in
+            print("response recieved: \(response)")
+        }
         
     }
 }
