@@ -30,6 +30,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard ARWorldTrackingConfiguration.supportsFrameSemantics([.sceneDepth, .smoothedSceneDepth]) else {
+            print("Unable to configure ARSession!")
+            return
+        }
+        
         // Set the view's delegate
         sceneView.delegate = self
         

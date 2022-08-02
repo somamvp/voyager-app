@@ -19,7 +19,7 @@ class LoopClock {
     let fps: Int
     let timeIntervalInSeconds: Double
     
-    private(set) var counter = 0
+    private(set) var counter: Int = 0
     
     init(fps: Int) {
         self.fps = fps
@@ -37,8 +37,11 @@ class LoopClock {
         self.counter = 0
         
         self.timer = Timer.scheduledTimer(withTimeInterval: timeIntervalInSeconds, repeats: true) { [weak self] timer in
-            self?.delegate?.invoke(counter: counter)
-            self?.counter += 1
+            if let counter = self?.counter {
+                
+                self?.delegate?.invoke(counter: counter)
+                self?.counter += 1
+            }
         }
     }
     
