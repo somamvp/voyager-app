@@ -14,6 +14,7 @@
 		B12BDE8A28910A3A003361A8 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE8928910A3A003361A8 /* Server.swift */; };
 		B12BDE8C2891131F003361A8 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE8B2891131F003361A8 /* K.swift */; };
 		B12BDE8E28911369003361A8 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = B12BDE8D28911369003361A8 /* secrets.plist */; };
+		B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17761A0289A1407008AB52D /* ImageResizeExtension.swift */; };
 		B1CF440A287FAE9A0002B733 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF4409287FAE9A0002B733 /* AppDelegate.swift */; };
 		B1CF440C287FAE9A0002B733 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF440B287FAE9A0002B733 /* SceneDelegate.swift */; };
 		B1CF440E287FAE9A0002B733 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF440D287FAE9A0002B733 /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 		B12BDE8928910A3A003361A8 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		B12BDE8B2891131F003361A8 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		B12BDE8D28911369003361A8 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
+		B17761A0289A1407008AB52D /* ImageResizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizeExtension.swift; sourceTree = "<group>"; };
 		B1CF4406287FAE9A0002B733 /* voyager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = voyager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1CF4409287FAE9A0002B733 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1CF440B287FAE9A0002B733 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				B1CF4417287FAE9B0002B733 /* Info.plist */,
 				B12BDE8B2891131F003361A8 /* K.swift */,
 				B12BDE8D28911369003361A8 /* secrets.plist */,
+				B17761A0289A1407008AB52D /* ImageResizeExtension.swift */,
 			);
 			path = voyager;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				B12BDE8A28910A3A003361A8 /* Server.swift in Sources */,
 				B1CF440E287FAE9A0002B733 /* ViewController.swift in Sources */,
 				B12BDE882890F6B7003361A8 /* ARReceiver.swift in Sources */,
+				B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */,
 				B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */,
 				B1CF440A287FAE9A0002B733 /* AppDelegate.swift in Sources */,
 				B12BDE8C2891131F003361A8 /* K.swift in Sources */,
