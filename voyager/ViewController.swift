@@ -22,7 +22,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var lastArData: ARData?
     var depthSaver: DepthSaver!
     
-    let fps = 10
+    let fps = 1
     lazy var loopClock: LoopClock = { LoopClock(fps: self.fps) }()
     
     var server = Server()
@@ -63,12 +63,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func handleCaptureButton(_ sender: Any) {
-        do {
-            try depthSaver.saveDepthToCilpBoard()
-            self.view.makeToast("LiDAR Sensor data copied to clipboard!")
-        } catch {
-            self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
-        }
+//        do {
+//            try depthSaver.saveDepthToCilpBoard()
+//            self.view.makeToast("LiDAR Sensor data copied to clipboard!")
+//        } catch {
+//            self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
+//        }
+        
+        sendRGBImage()
+
     }
     
 }
@@ -91,15 +94,19 @@ extension ViewController: ARDataReceiver {
 
 extension ViewController: LoopClockDelegate {
     
-    func invoke(counter: Int) {
-        print("loop clock invoked: \(loopClock.counter)")
+    func sendRGBImage(sequenceNo: Int = 0) {
         
         if let img = lastArData?.colorImage {
-            let uploadData = ServerImageUploadData(sequenceNo: counter, image: img)
+            let uploadData = ServerImageUploadData(sequenceNo: sequenceNo, image: img)
             server.send(imgData: uploadData)
         } else {
             self.view.makeToast("Unable to retrieve current RGB image!")
         }
+    }
+    
+    func invoke(counter: Int) {
+        print("loop clock invoked: \(loopClock.counter)")
+//        sendRGBImage(sequenceNo: counter)
     }
 }
 
