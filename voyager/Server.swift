@@ -50,6 +50,8 @@ struct ServerYoloResponseRawData: Decodable {
     }
 }
 
+typealias ServerGuideResponseRawData = String
+
 class Server {
     
     let k = K()
@@ -79,7 +81,7 @@ class Server {
             
             multipartFormData.append(imgData.imageData!, withName: "img", fileName: imgData.filename, mimeType: "image/jpg")
                 
-        }, to: serverImageUploadURI!).responseDecodable(of: [ServerYoloResponseRawData].self) { response in
+        }, to: serverImageUploadURI!).responseDecodable(of: [ServerGuideResponseRawData].self) { [weak self] response in
             print("response recieved: \(response)")
             if case .failure = response.result {
                 print(response.debugDescription)
