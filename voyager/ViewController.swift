@@ -28,7 +28,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     let fps = 1
     lazy var loopClock: LoopClock = { LoopClock(fps: self.fps) }()
     
-    var server = Server()
+    var server: Server!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +48,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.depthSaver = DepthSaver(session: self.arSession)
         
         loopClock.delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        loopClock.start()
+        server = Server(viewController: self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -105,10 +101,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
 }
 
+extension ViewController: ServerGuideDelegate {
+    
+    func alertGuide(guide: [ServerGuideResponseRawData]) {
+        if (!guide.isEmpty) {
+            self.view.makeToast(guide.joined(separator: "\n"))
+        }
+    }
+    
+}
+
 extension ViewController: ARDataReceiver {
+    
     func onNewARData(arData: ARData) {
         lastArData = arData
-        displayDepthImage()
+//        displayDepthImage()
     }
     
     func displayDepthImage() {

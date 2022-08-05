@@ -52,6 +52,10 @@ struct ServerYoloResponseRawData: Decodable {
 
 typealias ServerGuideResponseRawData = String
 
+protocol ServerGuideDelegate: AnyObject {
+    func alertGuide(guide: [ServerGuideResponseRawData])
+}
+
 class Server {
     
     let k = K()
@@ -59,10 +63,10 @@ class Server {
     var serverImageUploadURI: URL?
     var serverStartURI: URL?
     
-    weak var viewController: ViewController!
+    weak var guider: ServerGuideDelegate!
     
-    init(viewController: ViewController) {
-        self.viewController = viewController
+    init(viewController: ServerGuideDelegate) {
+        self.guider = viewController
         
         self.serverURI = URL(string: k.serverURI)
         self.serverImageUploadURI = serverURI?.appendingPathComponent(k.serverImageUploadEndpoint)
@@ -79,8 +83,8 @@ class Server {
     
     func start() {
         print("starting server")
-        _ = AF.request(serverStartURI!, method: .put).response { response in
-            self.viewController.showGuide(guide: ["starting guide!"])
+        _ = AF.request(serverStartURI!, method: .put).response { [weak self] response in
+            self?.guider.alertGuide(guide: ["starting guide!"])
         }
     }
     
@@ -105,6 +109,8 @@ class Server {
             print("response recieved: \(response)")
             if case .failure = response.result {
                 print(response.debugDescription)
+            } else {
+                self?.guider.alertGuide(guide: try! response.result.get())
             }
         }
         
