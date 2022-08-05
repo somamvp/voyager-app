@@ -9,8 +9,12 @@ import Foundation
 
 struct K {
     
+    static var startButtonText = "Start!"
+    static var stopButtonText = "Stop!"
+    
     var serverURI: String
     var serverImageUploadEndpoint: String
+    var serverStartEndpoint: String
 }
 
 extension K {
@@ -23,13 +27,15 @@ extension K {
         
         // read
         if let serverURI = dictionary["server-uri"] as? String,
-           let serverImageUploadEndpoint = dictionary["image-post-endpoint"] as? String {
+           let serverImageUploadEndpoint = dictionary["image-post-endpoint"] as? String,
+           let serverStartEndpoint = dictionary["start-endpoint"] as? String {
             
             self.serverURI = serverURI
             self.serverImageUploadEndpoint = serverImageUploadEndpoint
+            self.serverStartEndpoint = serverStartEndpoint
             
         } else {
-            fatalError("secrets.plist not containing server uri and endpoint!")
+            fatalError("secrets.plist not containing server uri and endpoints!")
         }
     }
     

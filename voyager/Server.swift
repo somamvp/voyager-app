@@ -57,14 +57,34 @@ class Server {
     let k = K()
     var serverURI: URL?
     var serverImageUploadURI: URL?
+    var serverStartURI: URL?
     
-    init() {
+    weak var viewController: ViewController!
+    
+    init(viewController: ViewController) {
+        self.viewController = viewController
+        
         self.serverURI = URL(string: k.serverURI)
         self.serverImageUploadURI = serverURI?.appendingPathComponent(k.serverImageUploadEndpoint)
-        if serverURI != nil, serverImageUploadURI != nil {
+        self.serverStartURI = serverURI?.appendingPathComponent(k.serverStartEndpoint)
+        
+        if serverURI != nil,
+           serverImageUploadURI != nil,
+           serverStartURI != nil {
             print("server uri constructed")
+        } else {
+            fatalError("server uri not constructed!")
         }
     }
+    
+    func start() {
+        print("starting server")
+        _ = AF.request(serverStartURI!, method: .put).response { response in
+            self.viewController.showGuide(guide: ["starting guide!"])
+        }
+    }
+    
+    func stop() {}
     
     func send(imgData: ServerImageUploadData) {
         print("sending image to server")

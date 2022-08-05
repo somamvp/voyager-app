@@ -15,6 +15,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var imgView: UIImageView!
     
+    @IBOutlet weak var guideStartStopButton: UIButton!
+    var isGuiding = false
+    
     var currentDepthMap: CVPixelBuffer?
     
     var arSession: ARSession!
@@ -58,20 +61,46 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Pause the view's session
         sceneView.session.pause()
-        
-        loopClock.stop()
     }
     
     @IBAction func handleCaptureButton(_ sender: Any) {
-//        do {
-//            try depthSaver.saveDepthToCilpBoard()
-//            self.view.makeToast("LiDAR Sensor data copied to clipboard!")
-//        } catch {
-//            self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
-//        }
-        
-        sendRGBImage()
+        do {
+            try depthSaver.saveDepthToCilpBoard()
+            self.view.makeToast("LiDAR Sensor data copied to clipboard!")
+        } catch {
+            self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
+        }
 
+    }
+    
+    func toggleStartStopButton() {
+        if (isGuiding) {
+            guideStartStopButton.setTitle(K.stopButtonText, for: .normal)
+        } else {
+            guideStartStopButton.setTitle(K.startButtonText, for: .normal)
+        }
+    }
+    
+    @IBAction func handleStartStopButton(_ sender: UIButton) {
+        self.isGuiding.toggle()
+        toggleStartStopButton()
+        if (isGuiding) {
+            startGuiding()
+        } else {
+            stopGuiding()
+        }
+    }
+    
+    func startGuiding() {
+        server.start()
+        
+        loopClock.start()
+    }
+    
+    func stopGuiding() {
+        server.stop()
+        
+        loopClock.stop()
     }
     
 }
@@ -106,7 +135,7 @@ extension ViewController: LoopClockDelegate {
     
     func invoke(counter: Int) {
         print("loop clock invoked: \(loopClock.counter)")
-//        sendRGBImage(sequenceNo: counter)
+        sendRGBImage(sequenceNo: counter)
     }
 }
 
