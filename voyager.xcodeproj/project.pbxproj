@@ -78,6 +78,33 @@
 			path = ReplayData;
 			sourceTree = "<group>";
 		};
+		B108E79F28A0D458000B399D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B17761A0289A1407008AB52D /* ImageResizeExtension.swift */,
+				B12BDE8928910A3A003361A8 /* Server.swift */,
+				B17BF217289D5D1900CA7ABA /* ServerData.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		B108E7A028A0D462000B399D /* ARData */ = {
+			isa = PBXGroup;
+			children = (
+				B12BDE872890F6B7003361A8 /* ARReceiver.swift */,
+				B12BDE83288FAA95003361A8 /* DepthSaver.swift */,
+			);
+			path = ARData;
+			sourceTree = "<group>";
+		};
+		B108E7A228A0D4C6000B399D /* ClockService */ = {
+			isa = PBXGroup;
+			children = (
+				B12BDE85288FB6CA003361A8 /* LoopClock.swift */,
+			);
+			path = ClockService;
+			sourceTree = "<group>";
+		};
 		B1CF43FD287FAE9A0002B733 = {
 			isa = PBXGroup;
 			children = (
@@ -103,13 +130,10 @@
 				B1CF4409287FAE9A0002B733 /* AppDelegate.swift */,
 				B1CF440B287FAE9A0002B733 /* SceneDelegate.swift */,
 				B1CF440D287FAE9A0002B733 /* ViewController.swift */,
-				B12BDE872890F6B7003361A8 /* ARReceiver.swift */,
-				B12BDE83288FAA95003361A8 /* DepthSaver.swift */,
-				B12BDE85288FB6CA003361A8 /* LoopClock.swift */,
 				B12BDE8B2891131F003361A8 /* K.swift */,
-				B17761A0289A1407008AB52D /* ImageResizeExtension.swift */,
-				B12BDE8928910A3A003361A8 /* Server.swift */,
-				B17BF217289D5D1900CA7ABA /* ServerData.swift */,
+				B108E7A228A0D4C6000B399D /* ClockService */,
+				B108E7A028A0D462000B399D /* ARData */,
+				B108E79F28A0D458000B399D /* Networking */,
 				B1CF440F287FAE9A0002B733 /* Main.storyboard */,
 				B1CF4412287FAE9B0002B733 /* Assets.xcassets */,
 				B1CF4414287FAE9B0002B733 /* LaunchScreen.storyboard */,
