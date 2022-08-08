@@ -11,6 +11,9 @@ protocol LoopClockDelegate: AnyObject {
     func invoke(counter: Int)
 }
 
+/// 서비스의 메인 클럭 객체.
+/// 내부적으로 `Timer` 객체를 가지고, `fps` 값에 따라 초당 n번 트리거
+/// 트리거 시 `LoopClockDelegate.invoke()` 호출
 class LoopClock {
     
     var timer: Timer?

@@ -9,6 +9,7 @@
 
 import UIKit
 
+/// `UIImage` 객체에 resizing 기능을 부여하는 extension.
 extension UIImage {
     func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
         // Determine the scale factor that preserves aspect ratio

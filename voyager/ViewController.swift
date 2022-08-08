@@ -20,16 +20,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var currentDepthMap: CVPixelBuffer?
     
+    // AR data objects
     var arSession: ARSession!
     var arReciever: ARReceiver!
     var lastArData: ARData?
     var depthSaver: DepthSaver!
     
     let fps = 1
-    lazy var loopClock: LoopClock = { LoopClock(fps: self.fps) }()
+    var loopClock: LoopClock!
     
     var server: Server!
     
+    /// configure data & service objects.
+    /// set delegates.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +50,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.arSession = sceneView.session
         self.depthSaver = DepthSaver(session: self.arSession)
         
+        self.loopClock = LoopClock(fps: self.fps)
         loopClock.delegate = self
         
         server = Server(viewController: self)
@@ -69,14 +73,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     }
     
-    func toggleStartStopButton() {
-        if (isGuiding) {
-            guideStartStopButton.setTitle(K.stopButtonText, for: .normal)
-        } else {
-            guideStartStopButton.setTitle(K.startButtonText, for: .normal)
-        }
-    }
-    
     @IBAction func handleStartStopButton(_ sender: UIButton) {
         self.isGuiding.toggle()
         toggleStartStopButton()
@@ -84,6 +80,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             startGuiding()
         } else {
             stopGuiding()
+        }
+    }
+    
+    func toggleStartStopButton() {
+        if (isGuiding) {
+            guideStartStopButton.setTitle(K.stopButtonText, for: .normal)
+        } else {
+            guideStartStopButton.setTitle(K.startButtonText, for: .normal)
         }
     }
     
@@ -103,6 +107,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
 extension ViewController: ServerGuideDelegate {
     
+    /// called when server recieves guidance from stateMachine
     func alertGuide(guide: [ServerGuideResponseRawData]) {
         if (!guide.isEmpty) {
             self.view.makeToast(guide.joined(separator: "\n"))
@@ -113,6 +118,7 @@ extension ViewController: ServerGuideDelegate {
 
 extension ViewController: ARDataReceiver {
     
+    /// called when AR data is updated
     func onNewARData(arData: ARData) {
         lastArData = arData
 //        displayDepthImage()
@@ -130,6 +136,12 @@ extension ViewController: ARDataReceiver {
 
 extension ViewController: LoopClockDelegate {
     
+    /// called for every loopClock step
+    func invoke(counter: Int) {
+        print("loop clock invoked: \(loopClock.counter)")
+        sendRGBImage(sequenceNo: counter)
+    }
+    
     func sendRGBImage(sequenceNo: Int = 0) {
         
         if let img = lastArData?.colorImage {
@@ -138,11 +150,6 @@ extension ViewController: LoopClockDelegate {
         } else {
             self.view.makeToast("Unable to retrieve current RGB image!")
         }
-    }
-    
-    func invoke(counter: Int) {
-        print("loop clock invoked: \(loopClock.counter)")
-        sendRGBImage(sequenceNo: counter)
     }
 }
 
