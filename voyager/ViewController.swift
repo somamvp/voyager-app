@@ -15,37 +15,45 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var imgView: UIImageView!
     
+    @IBOutlet weak var guideStartStopButton: UIButton!
+    var isGuiding = false
+    
     var currentDepthMap: CVPixelBuffer?
     
+    // AR data objects
     var arSession: ARSession!
+    var arReciever: ARReceiver!
+    var lastArData: ARData?
     var depthSaver: DepthSaver!
     
+    let fps = 1
+    var loopClock: LoopClock!
+    
+    var server: Server!
+    
+    /// configure data & service objects.
+    /// set delegates.
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard ARWorldTrackingConfiguration.supportsFrameSemantics([.sceneDepth, .smoothedSceneDepth]) else {
+            print("Unable to configure ARSession!")
+            return
+        }
+        
         // Set the view's delegate
         sceneView.delegate = self
-        sceneView.session.delegate = self
+        
+        arReciever = ARReceiver(session: sceneView.session)
+        arReciever.delegate = self
         
         self.arSession = sceneView.session
         self.depthSaver = DepthSaver(session: self.arSession)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        if !ARWorldTrackingConfiguration.isSupported {
-            print("AR Configuration not supported")
-            return
-        }
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
-
-        configuration.frameSemantics = [.smoothedSceneDepth]
+        self.loopClock = LoopClock(fps: self.fps)
+        loopClock.delegate = self
         
-        // Run the view's session
-        sceneView.session.run(configuration)
-        
+        server = Server(viewController: self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,21 +70,86 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         } catch {
             self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
         }
+
+    }
+    
+    @IBAction func handleStartStopButton(_ sender: UIButton) {
+        self.isGuiding.toggle()
+        toggleStartStopButton()
+        if (isGuiding) {
+            startGuiding()
+        } else {
+            stopGuiding()
+        }
+    }
+    
+    func toggleStartStopButton() {
+        if (isGuiding) {
+            guideStartStopButton.setTitle(K.stopButtonText, for: .normal)
+        } else {
+            guideStartStopButton.setTitle(K.startButtonText, for: .normal)
+        }
+    }
+    
+    func startGuiding() {
+        server.start()
+        
+        loopClock.start()
+    }
+    
+    func stopGuiding() {
+        server.stop()
+        
+        loopClock.stop()
     }
     
 }
 
-extension ViewController: ARSessionDelegate {
+extension ViewController: ServerGuideDelegate {
     
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        
-        guard let depthSmoothData = frame.smoothedSceneDepth else { return }
+    /// called when server recieves guidance from stateMachine
+    func alertGuide(guide: [ServerGuideResponseRawData]) {
+        if (!guide.isEmpty) {
+            self.view.makeToast(guide.joined(separator: "\n"))
+        }
+    }
+    
+}
 
-        currentDepthMap = depthSmoothData.depthMap
+extension ViewController: ARDataReceiver {
+    
+    /// called when AR data is updated
+    func onNewARData(arData: ARData) {
+        lastArData = arData
+//        displayDepthImage()
+    }
+    
+    func displayDepthImage() {
         
-        let depthImgCI = CIImage(cvPixelBuffer: currentDepthMap!)
+        guard let currentDepthMap = lastArData?.depthSmoothImage else { return }
+        
+        let depthImgCI = CIImage(cvPixelBuffer: currentDepthMap)
         
         imgView.image = UIImage(ciImage: depthImgCI.oriented(.right))
+    }
+}
+
+extension ViewController: LoopClockDelegate {
+    
+    /// called for every loopClock step
+    func invoke(counter: Int) {
+        print("loop clock invoked: \(loopClock.counter)")
+        sendRGBImage(sequenceNo: counter)
+    }
+    
+    func sendRGBImage(sequenceNo: Int = 0) {
+        
+        if let img = lastArData?.colorImage {
+            let uploadData = ServerImageUploadData(sequenceNo: sequenceNo, image: img)
+            server.send(imgData: uploadData)
+        } else {
+            self.view.makeToast("Unable to retrieve current RGB image!")
+        }
     }
 }
 

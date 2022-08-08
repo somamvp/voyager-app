@@ -7,5 +7,6 @@ target 'voyager' do
 
   # Pods for voyager
   pod 'Toast-Swift', '~> 5.0.1'
+  pod 'Alamofire', '~> 5.6.2'
 
 end

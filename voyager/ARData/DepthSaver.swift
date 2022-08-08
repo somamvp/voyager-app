@@ -8,6 +8,7 @@
 import UIKit
 import ARKit
 
+/// 디버깅 목적으로, 현재 시점의 Depth 값을 float 배열로 가져와 클립보드에 저장하는 객체.
 class DepthSaver {
     
     weak var arSession: ARSession!
