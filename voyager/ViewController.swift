@@ -31,6 +31,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var server: Server!
     
+    var depthGuider = DepthGuider()
+    
     /// configure data & service objects.
     /// set delegates.
     override func viewDidLoad() {
@@ -64,13 +66,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func handleCaptureButton(_ sender: Any) {
-        do {
-            try depthSaver.saveDepthToCilpBoard()
-            self.view.makeToast("LiDAR Sensor data copied to clipboard!")
-        } catch {
-            self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
-        }
+//        do {
+//            try depthSaver.saveDepthToCilpBoard()
+//            self.view.makeToast("LiDAR Sensor data copied to clipboard!")
+//        } catch {
+//            self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
+//        }
 
+        if let depthImage = lastArData?.depthSmoothImage {
+            let landscapeGuide = depthGuider.detectLandscape(depthImage: depthImage)
+            switch landscapeGuide {
+            case .cliff(let distance):
+                self.view.makeToast(String(format: "추락지형! %.2f 미터", distance))
+            case .wall(let distance):
+                self.view.makeToast(String(format: "전방 장애물! %.2f 미터", distance))
+            default:
+                self.view.makeToast("지형 정상!")
+            }
+            
+        }
+        displayDepthImage()
     }
     
     @IBAction func handleStartStopButton(_ sender: UIButton) {

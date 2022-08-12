@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		04D593924D441940584A7964 /* Pods_voyager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F392FD73744213AF29CE1B /* Pods_voyager.framework */; };
 		B108E7A728A0F41C000B399D /* OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = B108E7A628A0F41C000B399D /* OpenCV.mm */; };
-		B12590E628A3B5D60023E92B /* constants.mm in Sources */ = {isa = PBXBuildFile; fileRef = B12590E528A3B5D60023E92B /* constants.mm */; };
 		B12590E828A3C4710023E92B /* DepthGuider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12590E728A3C4710023E92B /* DepthGuider.swift */; };
 		B12590EA28A3C49A0023E92B /* DepthK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12590E928A3C49A0023E92B /* DepthK.swift */; };
 		B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE83288FAA95003361A8 /* DepthSaver.swift */; };
@@ -40,7 +39,6 @@
 		B108E7A528A0F41C000B399D /* OpenCV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCV.h; sourceTree = "<group>"; };
 		B108E7A628A0F41C000B399D /* OpenCV.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCV.mm; sourceTree = "<group>"; };
 		B108E7A828A0F494000B399D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		B12590E528A3B5D60023E92B /* constants.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = constants.mm; sourceTree = "<group>"; };
 		B12590E728A3C4710023E92B /* DepthGuider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthGuider.swift; sourceTree = "<group>"; };
 		B12590E928A3C49A0023E92B /* DepthK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthK.swift; sourceTree = "<group>"; };
 		B12BDE83288FAA95003361A8 /* DepthSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthSaver.swift; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 				B108E7A628A0F41C000B399D /* OpenCV.mm */,
 				B108E7A428A0F41B000B399D /* voyager-Bridging-Header.h */,
 				B108E7A828A0F494000B399D /* PrefixHeader.pch */,
-				B12590E528A3B5D60023E92B /* constants.mm */,
 			);
 			path = ImageProcessing;
 			sourceTree = "<group>";
@@ -309,7 +306,6 @@
 				B17BF218289D5D1900CA7ABA /* ServerData.swift in Sources */,
 				B12BDE8A28910A3A003361A8 /* Server.swift in Sources */,
 				B1CF440E287FAE9A0002B733 /* ViewController.swift in Sources */,
-				B12590E628A3B5D60023E92B /* constants.mm in Sources */,
 				B12BDE882890F6B7003361A8 /* ARReceiver.swift in Sources */,
 				B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */,
 				B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */,
