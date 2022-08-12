@@ -89,33 +89,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func handleStartStopButton(_ sender: UIButton) {
-        self.isGuiding.toggle()
-        toggleStartStopButton()
-        if (isGuiding) {
-            startGuiding()
+        guideStartStopButton.isEnabled = false
+        
+        if (!isGuiding) {
+            requestStartGuiding()
         } else {
-            stopGuiding()
+            requestStopGuiding()
         }
     }
     
-    func toggleStartStopButton() {
+    func updateStartStopButton() {
         if (isGuiding) {
             guideStartStopButton.setTitle(K.stopButtonText, for: .normal)
         } else {
             guideStartStopButton.setTitle(K.startButtonText, for: .normal)
         }
-    }
-    
-    func startGuiding() {
-        server.start()
-        
-        loopClock.start()
-    }
-    
-    func stopGuiding() {
-        server.stop()
-        
-        loopClock.stop()
     }
     
 }
@@ -127,6 +115,39 @@ extension ViewController: ServerGuideDelegate {
         if (!guide.isEmpty) {
             self.view.makeToast(guide.joined(separator: "\n"))
         }
+    }
+    
+    /// call this before starting server guide
+    func requestStartGuiding() {
+        server.start()
+    }
+    
+    /// delegate method; called by server when server acknowledges `requestStartGuiding()`
+    func startGuiding() {
+        self.alertGuide(guide: ["starting guide!"])
+        
+        isGuiding = true
+        updateStartStopButton()
+        guideStartStopButton.isEnabled = true
+        
+        loopClock.start()
+    }
+    
+    /// call this before stoping server guide
+    func requestStopGuiding() {
+        server.stop()
+    }
+    
+    
+    /// delegate method; called by server when server acknowledges `requestStopGuiding()`
+    func stopGuiding() {
+        self.alertGuide(guide: ["stopping guide!"])
+        
+        isGuiding = false
+        updateStartStopButton()
+        guideStartStopButton.isEnabled = true
+        
+        loopClock.stop()
     }
     
 }
