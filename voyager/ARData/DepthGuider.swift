@@ -26,7 +26,11 @@ class DepthGuider {
         
         let diffs = getDiffFromReference(depthColumn: depthColumnReversed)
         
-        let deviationResultTuple = findDeviationFromZero(arr: diffs, from: 0, to: diffs.count - scanColumnFromPixel, deviation: DepthK.refDeviation)
+        let deviationResultTuple = findDeviationFromZero(
+            arr: diffs,
+            from: 0,
+            to: diffs.count - scanColumnFromPixel,
+            deviation: DepthK.refDeviation)
         
         let resultPixel = depthImageRows - deviationResultTuple.index
         
@@ -59,11 +63,14 @@ class DepthGuider {
         
         CVPixelBufferLockBaseAddress(depth, CVPixelBufferLockFlags(rawValue: 0))
         
-        let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depth),to: UnsafeMutablePointer<Float>.self)
+        let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depth), to: UnsafeMutablePointer<Float>.self)
         
         var depthArray = [Float]()
         
-        let columnScanRange = bottomUp ? stride(from: depthHeight-1, to: 0, by: -1) : stride(from: 0, to: depthHeight-1, by: 1)
+        let columnScanRange = bottomUp ?
+        stride(from: depthHeight-1, to: 0, by: -1) :
+        stride(from: 0, to: depthHeight-1, by: 1)
+        
         for y in columnScanRange {
             let distanceAtXYPoint = floatBuffer[x * depthHeight + y]
             depthArray.append(distanceAtXYPoint)
@@ -92,7 +99,13 @@ class DepthGuider {
         return offsetSubtracted
     }
     
-    func findDeviationFromZero(arr: [Float], from: Int, to: Int, deviation: [Float], patience: Int = 5) -> (sign: Int, index: Int) {
+    func findDeviationFromZero(
+        arr: [Float],
+        from: Int,
+        to: Int,
+        deviation: [Float],
+        patience: Int = 5
+    ) -> (sign: Int, index: Int) {
         
         var idx = from
         var isDone = false
@@ -110,9 +123,7 @@ class DepthGuider {
                         break
                     }
                 }
-            }
-            
-            else if (arr[idx] < -deviation[idx]) {
+            } else if arr[idx] < -deviation[idx] {
                 isDone = true
                 
                 for searchIdx in 1...1+patience {
@@ -138,6 +149,5 @@ class DepthGuider {
         
         return (sign: 0, index: 0)
     }
-    
     
 }

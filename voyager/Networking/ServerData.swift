@@ -18,7 +18,8 @@ struct ServerImageUploadData {
     var image: CVPixelBuffer
     var imageData: Data? {
         let ciImage = CIImage(cvPixelBuffer: image).oriented(.right)
-        let scaledUIImage = UIImage(ciImage: ciImage).scalePreservingAspectRatio(targetSize: ServerImageUploadData.targetSize)
+        let scaledUIImage = UIImage(ciImage: ciImage)
+            .scalePreservingAspectRatio(targetSize: ServerImageUploadData.targetSize)
         
         return scaledUIImage.jpegData(compressionQuality: ServerImageUploadData.compressionQuality)
     }

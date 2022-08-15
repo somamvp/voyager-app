@@ -91,7 +91,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func handleStartStopButton(_ sender: UIButton) {
         guideStartStopButton.isEnabled = false
         
-        if (!isGuiding) {
+        if !isGuiding {
             requestStartGuiding()
         } else {
             requestStopGuiding()
@@ -99,7 +99,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func updateStartStopButton() {
-        if (isGuiding) {
+        if isGuiding {
             guideStartStopButton.setTitle(K.stopButtonText, for: .normal)
         } else {
             guideStartStopButton.setTitle(K.startButtonText, for: .normal)
@@ -112,7 +112,7 @@ extension ViewController: ServerGuideDelegate {
     
     /// called when server recieves guidance from stateMachine
     func alertGuide(guide: [ServerGuideResponseRawData]) {
-        if (!guide.isEmpty) {
+        if !guide.isEmpty {
             self.view.makeToast(guide.joined(separator: "\n"))
         }
     }
@@ -137,7 +137,6 @@ extension ViewController: ServerGuideDelegate {
     func requestStopGuiding() {
         server.stop()
     }
-    
     
     /// delegate method; called by server when server acknowledges `requestStopGuiding()`
     func stopGuiding() {
@@ -188,4 +187,3 @@ extension ViewController: LoopClockDelegate {
         }
     }
 }
-

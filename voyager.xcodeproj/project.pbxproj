@@ -16,6 +16,7 @@
 		B12BDE8A28910A3A003361A8 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE8928910A3A003361A8 /* Server.swift */; };
 		B12BDE8C2891131F003361A8 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE8B2891131F003361A8 /* K.swift */; };
 		B12BDE8E28911369003361A8 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = B12BDE8D28911369003361A8 /* secrets.plist */; };
+		B16F5EDB28A9FD28009A0F36 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B16F5EDA28A9FD28009A0F36 /* .swiftlint.yml */; };
 		B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17761A0289A1407008AB52D /* ImageResizeExtension.swift */; };
 		B17761A3289B82F8008AB52D /* 롯데시네마앞_주간.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17761A2289B82F8008AB52D /* 롯데시네마앞_주간.mov */; };
 		B17761A5289B8ED7008AB52D /* 관악구청남쪽_주간.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17761A4289B8ED7008AB52D /* 관악구청남쪽_주간.mov */; };
@@ -42,6 +43,7 @@
 		B12BDE8928910A3A003361A8 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		B12BDE8B2891131F003361A8 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		B12BDE8D28911369003361A8 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
+		B16F5EDA28A9FD28009A0F36 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B17761A0289A1407008AB52D /* ImageResizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizeExtension.swift; sourceTree = "<group>"; };
 		B17761A2289B82F8008AB52D /* 롯데시네마앞_주간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "롯데시네마앞_주간.mov"; sourceTree = "<group>"; };
 		B17761A4289B8ED7008AB52D /* 관악구청남쪽_주간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "관악구청남쪽_주간.mov"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		B1CF43FD287FAE9A0002B733 = {
 			isa = PBXGroup;
 			children = (
+				B16F5EDA28A9FD28009A0F36 /* .swiftlint.yml */,
 				B107ED4D28811BCC0071DE5E /* ReplayData */,
 				B1CF4408287FAE9A0002B733 /* voyager */,
 				B1CF4407287FAE9A0002B733 /* Products */,
@@ -174,6 +177,7 @@
 			buildConfigurationList = B1CF441A287FAE9B0002B733 /* Build configuration list for PBXNativeTarget "voyager" */;
 			buildPhases = (
 				FBA3728873FD26C122E149A1 /* [CP] Check Pods Manifest.lock */,
+				B162F3ED28A9F1340020BBBB /* SwiftLint Script */,
 				B1CF4402287FAE9A0002B733 /* Sources */,
 				B1CF4403287FAE9A0002B733 /* Frameworks */,
 				B1CF4404287FAE9A0002B733 /* Resources */,
@@ -227,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B16F5EDB28A9FD28009A0F36 /* .swiftlint.yml in Resources */,
 				B17761A5289B8ED7008AB52D /* 관악구청남쪽_주간.mov in Resources */,
 				B17761A3289B82F8008AB52D /* 롯데시네마앞_주간.mov in Resources */,
 				B12BDE8E28911369003361A8 /* secrets.plist in Resources */,
@@ -240,6 +245,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		B162F3ED28A9F1340020BBBB /* SwiftLint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which /opt/homebrew/bin/swiftlint >/dev/null; then\n  /opt/homebrew/bin/swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		C470A3EAAA02BFD2CEBFAC64 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

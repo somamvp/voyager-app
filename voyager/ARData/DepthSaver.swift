@@ -35,7 +35,7 @@ class DepthSaver {
         
         CVPixelBufferLockBaseAddress(depth, CVPixelBufferLockFlags(rawValue: 0))
         
-        let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depth),to: UnsafeMutablePointer<Float32>.self)
+        let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depth), to: UnsafeMutablePointer<Float32>.self)
         
         var depthArray = [[Float32]]()
         
@@ -44,7 +44,7 @@ class DepthSaver {
             for x in 0...depthWidth-1 {
                 let distanceAtXYPoint = floatBuffer[y * depthWidth + x]
                 distancesLine.append(distanceAtXYPoint)
-//                print("Depth in (\(x),\(y)): \(distanceAtXYPoint)")
+                //                print("Depth in (\(x),\(y)): \(distanceAtXYPoint)")
             }
             depthArray.append(distancesLine)
         }
@@ -53,9 +53,8 @@ class DepthSaver {
     }
     // Read more at https://www.it-jim.com/blog/iphones-12-pro-lidar-how-to-get-and-interpret-data/
     
-    
     // Auxiliary function to make String from depth map array
-    func getStringFrom2DimArray(array: [[Float32]], height: Int, width: Int) -> String{
+    func getStringFrom2DimArray(array: [[Float32]], height: Int, width: Int) -> String {
         var arrayStr: String = ""
         
         for y in 1...height-1 {

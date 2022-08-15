@@ -39,7 +39,10 @@ class LoopClock {
         
         self.counter = 0
         
-        self.timer = Timer.scheduledTimer(withTimeInterval: timeIntervalInSeconds, repeats: true) { [weak self] timer in
+        self.timer = Timer.scheduledTimer(
+            withTimeInterval: timeIntervalInSeconds,
+            repeats: true
+        ) { [weak self] _ in
             if let counter = self?.counter {
                 
                 self?.delegate?.invoke(counter: counter)
