@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		04D593924D441940584A7964 /* Pods_voyager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F392FD73744213AF29CE1B /* Pods_voyager.framework */; };
-		B108E7A728A0F41C000B399D /* OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = B108E7A628A0F41C000B399D /* OpenCV.mm */; };
 		B12590E828A3C4710023E92B /* DepthGuider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12590E728A3C4710023E92B /* DepthGuider.swift */; };
 		B12590EA28A3C49A0023E92B /* DepthK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12590E928A3C49A0023E92B /* DepthK.swift */; };
 		B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE83288FAA95003361A8 /* DepthSaver.swift */; };
@@ -35,10 +34,6 @@
 		9A45C0A51F67BE2A04A408B5 /* Pods-voyager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-voyager.release.xcconfig"; path = "Target Support Files/Pods-voyager/Pods-voyager.release.xcconfig"; sourceTree = "<group>"; };
 		B107ED4B288116650071DE5E /* 0715 관정1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정1.mov"; sourceTree = "<group>"; };
 		B107ED4C288116650071DE5E /* 0715 관정2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정2.mov"; sourceTree = "<group>"; };
-		B108E7A428A0F41B000B399D /* voyager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "voyager-Bridging-Header.h"; sourceTree = "<group>"; };
-		B108E7A528A0F41C000B399D /* OpenCV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCV.h; sourceTree = "<group>"; };
-		B108E7A628A0F41C000B399D /* OpenCV.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCV.mm; sourceTree = "<group>"; };
-		B108E7A828A0F494000B399D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B12590E728A3C4710023E92B /* DepthGuider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthGuider.swift; sourceTree = "<group>"; };
 		B12590E928A3C49A0023E92B /* DepthK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthK.swift; sourceTree = "<group>"; };
 		B12BDE83288FAA95003361A8 /* DepthSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthSaver.swift; sourceTree = "<group>"; };
@@ -116,17 +111,6 @@
 			path = ClockService;
 			sourceTree = "<group>";
 		};
-		B108E7A328A0F3DC000B399D /* ImageProcessing */ = {
-			isa = PBXGroup;
-			children = (
-				B108E7A528A0F41C000B399D /* OpenCV.h */,
-				B108E7A628A0F41C000B399D /* OpenCV.mm */,
-				B108E7A428A0F41B000B399D /* voyager-Bridging-Header.h */,
-				B108E7A828A0F494000B399D /* PrefixHeader.pch */,
-			);
-			path = ImageProcessing;
-			sourceTree = "<group>";
-		};
 		B1CF43FD287FAE9A0002B733 = {
 			isa = PBXGroup;
 			children = (
@@ -153,7 +137,6 @@
 				B1CF440B287FAE9A0002B733 /* SceneDelegate.swift */,
 				B1CF440D287FAE9A0002B733 /* ViewController.swift */,
 				B12BDE8B2891131F003361A8 /* K.swift */,
-				B108E7A328A0F3DC000B399D /* ImageProcessing */,
 				B108E7A228A0D4C6000B399D /* ClockService */,
 				B108E7A028A0D462000B399D /* ARData */,
 				B108E79F28A0D458000B399D /* Networking */,
@@ -309,7 +292,6 @@
 				B12BDE882890F6B7003361A8 /* ARReceiver.swift in Sources */,
 				B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */,
 				B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */,
-				B108E7A728A0F41C000B399D /* OpenCV.mm in Sources */,
 				B1CF440A287FAE9A0002B733 /* AppDelegate.swift in Sources */,
 				B12590EA28A3C49A0023E92B /* DepthK.swift in Sources */,
 				B12BDE8C2891131F003361A8 /* K.swift in Sources */,
@@ -382,6 +364,7 @@
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -441,6 +424,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -471,7 +455,8 @@
 				DEVELOPMENT_TEAM = BAH6G9J739;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_INPUT_FILETYPE = automatic;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/voyager/ImageProcessing/PrefixHeader.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = voyager/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -510,7 +495,8 @@
 				DEVELOPMENT_TEAM = BAH6G9J739;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_INPUT_FILETYPE = automatic;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/voyager/ImageProcessing/PrefixHeader.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = voyager/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
