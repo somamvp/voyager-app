@@ -33,6 +33,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var depthGuider = DepthGuider()
     
+    var speechGuider = SpeechGuider()
+    
     /// configure data & service objects.
     /// set delegates.
     override func viewDidLoad() {
@@ -56,6 +58,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         loopClock.delegate = self
         
         server = Server(viewController: self)
+        
+        // set AVAudioSession for speaker sound output
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .voicePrompt, options: [])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,6 +87,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.view.makeToast(String(format: "전방 장애물! %.2f 미터", distance))
             default:
                 self.view.makeToast("지형 정상!")
+                speechGuider.speak(string: "지형이 정상입니다.")
             }
             
         }

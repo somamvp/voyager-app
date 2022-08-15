@@ -17,6 +17,7 @@
 		B12BDE8C2891131F003361A8 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE8B2891131F003361A8 /* K.swift */; };
 		B12BDE8E28911369003361A8 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = B12BDE8D28911369003361A8 /* secrets.plist */; };
 		B16F5EDB28A9FD28009A0F36 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B16F5EDA28A9FD28009A0F36 /* .swiftlint.yml */; };
+		B16F5EDD28AA6FEC009A0F36 /* SpeechGuider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16F5EDC28AA6FEC009A0F36 /* SpeechGuider.swift */; };
 		B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17761A0289A1407008AB52D /* ImageResizeExtension.swift */; };
 		B17761A3289B82F8008AB52D /* 롯데시네마앞_주간.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17761A2289B82F8008AB52D /* 롯데시네마앞_주간.mov */; };
 		B17761A5289B8ED7008AB52D /* 관악구청남쪽_주간.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17761A4289B8ED7008AB52D /* 관악구청남쪽_주간.mov */; };
@@ -44,6 +45,7 @@
 		B12BDE8B2891131F003361A8 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		B12BDE8D28911369003361A8 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		B16F5EDA28A9FD28009A0F36 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		B16F5EDC28AA6FEC009A0F36 /* SpeechGuider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechGuider.swift; sourceTree = "<group>"; };
 		B17761A0289A1407008AB52D /* ImageResizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizeExtension.swift; sourceTree = "<group>"; };
 		B17761A2289B82F8008AB52D /* 롯데시네마앞_주간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "롯데시네마앞_주간.mov"; sourceTree = "<group>"; };
 		B17761A4289B8ED7008AB52D /* 관악구청남쪽_주간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "관악구청남쪽_주간.mov"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				B12BDE85288FB6CA003361A8 /* LoopClock.swift */,
+				B16F5EDC28AA6FEC009A0F36 /* SpeechGuider.swift */,
 			);
 			path = ClockService;
 			sourceTree = "<group>";
@@ -261,7 +264,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which /opt/homebrew/bin/swiftlint >/dev/null; then\n  /opt/homebrew/bin/swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which /opt/homebrew/bin/swiftlint >/dev/null; then\n  /opt/homebrew/bin/swiftlint --fix && /opt/homebrew/bin/swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		C470A3EAAA02BFD2CEBFAC64 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -315,6 +318,7 @@
 				B12BDE882890F6B7003361A8 /* ARReceiver.swift in Sources */,
 				B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */,
 				B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */,
+				B16F5EDD28AA6FEC009A0F36 /* SpeechGuider.swift in Sources */,
 				B1CF440A287FAE9A0002B733 /* AppDelegate.swift in Sources */,
 				B12590EA28A3C49A0023E92B /* DepthK.swift in Sources */,
 				B12BDE8C2891131F003361A8 /* K.swift in Sources */,
