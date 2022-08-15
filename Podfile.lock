@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (5.6.2)
+  - OpenCV (4.3.0)
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.6.2)
+  - OpenCV (~> 4.3.0)
   - Toast-Swift (~> 5.0.1)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - OpenCV
     - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  OpenCV: 681e0451c1e54c5930a8922277f817ed5d5ab459
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: e3737200422738ced4a9b38d2ccbf2f5e7879118
+PODFILE CHECKSUM: 4be45c2b8e16199e6d884b53fd1bbde1641666da
 
 COCOAPODS: 1.11.3

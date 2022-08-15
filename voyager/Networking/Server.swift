@@ -9,6 +9,11 @@ import Alamofire
 
 protocol ServerGuideDelegate: AnyObject {
     func alertGuide(guide: [ServerGuideResponseRawData])
+    
+    func requestStartGuiding()
+    func startGuiding()
+    func requestStopGuiding()
+    func stopGuiding()
 }
 
 /// 백엔드 API 서버와 통신하는 역할을 담당하는 객체.
@@ -41,13 +46,18 @@ class Server {
     
     func start() {
         print("starting server")
-        _ = AF.request(serverStartURI!, method: .put).response { [weak self] response in
-            self?.guider.alertGuide(guide: ["starting guide!"])
+        _ = AF.request(serverStartURI!, method: .get).response { [weak self] response in
+            if case .failure = response.result {
+                print(response.debugDescription)
+            } else {
+                self?.guider.startGuiding()
+            }
         }
     }
     
-    // todo: implement
-    func stop() {}
+    func stop() {
+        self.guider.stopGuiding()
+    }
     
     func send(imgData: ServerImageUploadData) {
         print("sending image to server")

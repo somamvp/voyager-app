@@ -31,6 +31,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var server: Server!
     
+    var depthGuider = DepthGuider()
+    
     /// configure data & service objects.
     /// set delegates.
     override func viewDidLoad() {
@@ -64,43 +66,44 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func handleCaptureButton(_ sender: Any) {
-        do {
-            try depthSaver.saveDepthToCilpBoard()
-            self.view.makeToast("LiDAR Sensor data copied to clipboard!")
-        } catch {
-            self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
-        }
+//        do {
+//            try depthSaver.saveDepthToCilpBoard()
+//            self.view.makeToast("LiDAR Sensor data copied to clipboard!")
+//        } catch {
+//            self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
+//        }
 
+        if let depthImage = lastArData?.depthSmoothImage {
+            let landscapeGuide = depthGuider.detectLandscape(depthImage: depthImage)
+            switch landscapeGuide {
+            case .cliff(let distance):
+                self.view.makeToast(String(format: "추락지형! %.2f 미터", distance))
+            case .wall(let distance):
+                self.view.makeToast(String(format: "전방 장애물! %.2f 미터", distance))
+            default:
+                self.view.makeToast("지형 정상!")
+            }
+            
+        }
+        displayDepthImage()
     }
     
     @IBAction func handleStartStopButton(_ sender: UIButton) {
-        self.isGuiding.toggle()
-        toggleStartStopButton()
-        if (isGuiding) {
-            startGuiding()
+        guideStartStopButton.isEnabled = false
+        
+        if (!isGuiding) {
+            requestStartGuiding()
         } else {
-            stopGuiding()
+            requestStopGuiding()
         }
     }
     
-    func toggleStartStopButton() {
+    func updateStartStopButton() {
         if (isGuiding) {
             guideStartStopButton.setTitle(K.stopButtonText, for: .normal)
         } else {
             guideStartStopButton.setTitle(K.startButtonText, for: .normal)
         }
-    }
-    
-    func startGuiding() {
-        server.start()
-        
-        loopClock.start()
-    }
-    
-    func stopGuiding() {
-        server.stop()
-        
-        loopClock.stop()
     }
     
 }
@@ -112,6 +115,39 @@ extension ViewController: ServerGuideDelegate {
         if (!guide.isEmpty) {
             self.view.makeToast(guide.joined(separator: "\n"))
         }
+    }
+    
+    /// call this before starting server guide
+    func requestStartGuiding() {
+        server.start()
+    }
+    
+    /// delegate method; called by server when server acknowledges `requestStartGuiding()`
+    func startGuiding() {
+        self.alertGuide(guide: ["starting guide!"])
+        
+        isGuiding = true
+        updateStartStopButton()
+        guideStartStopButton.isEnabled = true
+        
+        loopClock.start()
+    }
+    
+    /// call this before stoping server guide
+    func requestStopGuiding() {
+        server.stop()
+    }
+    
+    
+    /// delegate method; called by server when server acknowledges `requestStopGuiding()`
+    func stopGuiding() {
+        self.alertGuide(guide: ["stopping guide!"])
+        
+        isGuiding = false
+        updateStartStopButton()
+        guideStartStopButton.isEnabled = true
+        
+        loopClock.stop()
     }
     
 }

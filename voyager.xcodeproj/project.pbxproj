@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		04D593924D441940584A7964 /* Pods_voyager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F392FD73744213AF29CE1B /* Pods_voyager.framework */; };
+		B12590E828A3C4710023E92B /* DepthGuider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12590E728A3C4710023E92B /* DepthGuider.swift */; };
+		B12590EA28A3C49A0023E92B /* DepthK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12590E928A3C49A0023E92B /* DepthK.swift */; };
 		B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE83288FAA95003361A8 /* DepthSaver.swift */; };
 		B12BDE86288FB6CA003361A8 /* LoopClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE85288FB6CA003361A8 /* LoopClock.swift */; };
 		B12BDE882890F6B7003361A8 /* ARReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE872890F6B7003361A8 /* ARReceiver.swift */; };
@@ -32,6 +34,8 @@
 		9A45C0A51F67BE2A04A408B5 /* Pods-voyager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-voyager.release.xcconfig"; path = "Target Support Files/Pods-voyager/Pods-voyager.release.xcconfig"; sourceTree = "<group>"; };
 		B107ED4B288116650071DE5E /* 0715 관정1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정1.mov"; sourceTree = "<group>"; };
 		B107ED4C288116650071DE5E /* 0715 관정2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정2.mov"; sourceTree = "<group>"; };
+		B12590E728A3C4710023E92B /* DepthGuider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthGuider.swift; sourceTree = "<group>"; };
+		B12590E928A3C49A0023E92B /* DepthK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthK.swift; sourceTree = "<group>"; };
 		B12BDE83288FAA95003361A8 /* DepthSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthSaver.swift; sourceTree = "<group>"; };
 		B12BDE85288FB6CA003361A8 /* LoopClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopClock.swift; sourceTree = "<group>"; };
 		B12BDE872890F6B7003361A8 /* ARReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARReceiver.swift; sourceTree = "<group>"; };
@@ -93,6 +97,8 @@
 			children = (
 				B12BDE872890F6B7003361A8 /* ARReceiver.swift */,
 				B12BDE83288FAA95003361A8 /* DepthSaver.swift */,
+				B12590E728A3C4710023E92B /* DepthGuider.swift */,
+				B12590E928A3C49A0023E92B /* DepthK.swift */,
 			);
 			path = ARData;
 			sourceTree = "<group>";
@@ -194,6 +200,7 @@
 				TargetAttributes = {
 					B1CF4405287FAE9A0002B733 = {
 						CreatedOnToolsVersion = 13.4;
+						LastSwiftMigration = 1340;
 					};
 				};
 			};
@@ -286,8 +293,10 @@
 				B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */,
 				B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */,
 				B1CF440A287FAE9A0002B733 /* AppDelegate.swift in Sources */,
+				B12590EA28A3C49A0023E92B /* DepthK.swift in Sources */,
 				B12BDE8C2891131F003361A8 /* K.swift in Sources */,
 				B1CF440C287FAE9A0002B733 /* SceneDelegate.swift in Sources */,
+				B12590E828A3C4710023E92B /* DepthGuider.swift in Sources */,
 				B12BDE86288FB6CA003361A8 /* LoopClock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,7 +329,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -352,8 +361,10 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -380,7 +391,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -411,7 +422,9 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -434,11 +447,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BAH6G9J739;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = voyager/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -449,9 +470,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mvp.voyager;
+				PRODUCT_BUNDLE_IDENTIFIER = com.woosukji.voyager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "voyager/ImageProcessing/voyager-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -463,11 +487,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BAH6G9J739;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = voyager/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -478,9 +510,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mvp.voyager;
+				PRODUCT_BUNDLE_IDENTIFIER = com.woosukji.voyager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "voyager/ImageProcessing/voyager-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
