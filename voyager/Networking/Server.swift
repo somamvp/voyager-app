@@ -45,7 +45,7 @@ class Server {
     }
     
     func start() {
-        print("starting server")
+        print("sending start request to server")
         _ = AF.request(serverStartURI!, method: .get).response { [weak self] response in
             if case .failure = response.result {
                 print(response.debugDescription)

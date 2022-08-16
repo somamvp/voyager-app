@@ -143,7 +143,7 @@ extension ViewController: ServerGuideDelegate {
     
     /// delegate method; called by server when server acknowledges `requestStartGuiding()`
     func startGuiding() {
-        self.alertGuide(guide: ["starting guide!"])
+        self.alertGuide(guide: ["보행 안내를 시작합니다."])
         
         isGuiding = true
         updateStartStopButton()
@@ -159,7 +159,7 @@ extension ViewController: ServerGuideDelegate {
     
     /// delegate method; called by server when server acknowledges `requestStopGuiding()`
     func stopGuiding() {
-        self.alertGuide(guide: ["stopping guide!"])
+        self.alertGuide(guide: ["보행 안내를 종료합니다."])
         
         isGuiding = false
         updateStartStopButton()
