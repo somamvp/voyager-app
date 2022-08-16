@@ -33,7 +33,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var depthGuider = DepthGuider()
     
-    var speechGuider = SpeechGuider()
+    var audioGuider = AudioGuider()
     
     /// configure data & service objects.
     /// set delegates.
@@ -58,8 +58,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         server = Server(viewController: self)
         
+        configureGuider()
+    }
+    
+    func configureGuider() {
         // set AVAudioSession for speaker sound output
+        // https://stackoverflow.com/questions/69427369/avspeechsynthesizer-plays-sound-with-phone-call-speaker-instead-of-bottom-speake
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .voicePrompt, options: [])
+        
+        var style = ToastStyle()
+        style.messageFont = .systemFont(ofSize: 18)
+        
+        ToastManager.shared.style = style
+    }
+    
+    func guide(_ string: String) {
+        self.view.makeToast(string, duration: 2.0, position: .center)
+        audioGuider.speak(string: string)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,12 +96,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let landscapeGuide = depthGuider.detectLandscape(depthImage: depthImage)
             switch landscapeGuide {
             case .cliff(let distance):
-                self.view.makeToast(String(format: "추락지형! %.2f 미터", distance))
+                guide(String(format: "%.1f 미터 앞에 추락지형이 있습니다", distance))
             case .wall(let distance):
-                self.view.makeToast(String(format: "전방 장애물! %.2f 미터", distance))
+                guide(String(format: "%.1f 미터 앞에 장애물이 있습니다", distance))
             default:
-                self.view.makeToast("지형 정상!")
-                speechGuider.speak(string: "지형이 정상입니다.")
+                guide("지형이 정상입니다")
             }
             
         }
@@ -118,7 +132,7 @@ extension ViewController: ServerGuideDelegate {
     /// called when server recieves guidance from stateMachine
     func alertGuide(guide: [ServerGuideResponseRawData]) {
         if !guide.isEmpty {
-            self.view.makeToast(guide.joined(separator: "\n"))
+            self.guide(guide.joined(separator: "\n"))
         }
     }
     

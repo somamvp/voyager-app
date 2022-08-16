@@ -8,12 +8,13 @@
 import Foundation
 import AVFAudio
 
-class SpeechGuider {
+class AudioGuider {
     let voice = AVSpeechSynthesisVoice(language: "ko-KR")
     let synthesizer = AVSpeechSynthesizer()
     
     func speak(string: String) {
         let utterance = AVSpeechUtterance(string: string)
+        utterance.rate = 0.6
         utterance.voice = voice
         synthesizer.speak(utterance)
     }
