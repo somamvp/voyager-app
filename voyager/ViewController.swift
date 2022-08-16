@@ -48,13 +48,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the view's delegate
         sceneView.delegate = self
         
-        arReciever = ARReceiver(session: sceneView.session)
+        arSession = sceneView.session
+        arReciever = ARReceiver(session: self.arSession)
         arReciever.delegate = self
+        depthSaver = DepthSaver(session: self.arSession)
         
-        self.arSession = sceneView.session
-        self.depthSaver = DepthSaver(session: self.arSession)
-        
-        self.loopClock = LoopClock(fps: self.fps)
+        loopClock = LoopClock(fps: self.fps)
         loopClock.delegate = self
         
         server = Server(viewController: self)
