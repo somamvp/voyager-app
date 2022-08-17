@@ -20,11 +20,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
                                     <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thz-SV-j0d">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="431"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                     </arscnView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BZD-sR-NcW">
-                                        <rect key="frame" x="0.0" y="431" width="414" height="431"/>
-                                    </imageView>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEx-ev-x33">
@@ -63,7 +60,6 @@
                     </view>
                     <connections>
                         <outlet property="guideStartStopButton" destination="gck-6A-PSF" id="In2-33-u1F"/>
-                        <outlet property="imgView" destination="BZD-sR-NcW" id="f0l-51-jV5"/>
                         <outlet property="sceneView" destination="thz-SV-j0d" id="QlW-jX-UR2"/>
                     </connections>
                 </viewController>

@@ -13,7 +13,6 @@ import Toast_Swift
 class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var sceneView: ARSCNView!
-    @IBOutlet weak var imgView: UIImageView!
     
     @IBOutlet weak var guideStartStopButton: UIButton!
     var isGuiding = false
@@ -85,13 +84,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func handleCaptureButton(_ sender: Any) {
-//        do {
-//            try depthSaver.saveDepthToCilpBoard()
-//            self.view.makeToast("LiDAR Sensor data copied to clipboard!")
-//        } catch {
-//            self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
-//        }
-
         if let depthImage = lastArData?.depthSmoothImage {
             let landscapeGuide = depthGuider.detectLandscape(depthImage: depthImage)
             switch landscapeGuide {
@@ -104,7 +96,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             
         }
-        displayDepthImage()
     }
     
     @IBAction func handleStartStopButton(_ sender: UIButton) {
@@ -184,9 +175,10 @@ extension ViewController: ARDataReceiver {
         
         let depthImgCI = CIImage(cvPixelBuffer: currentDepthMap)
         
-        imgView.image = UIImage(ciImage: depthImgCI.oriented(.right))
+//        imgView.image = UIImage(ciImage: depthImgCI.oriented(.right))
     }
 }
+
 
 extension ViewController: LoopClockDelegate {
     
