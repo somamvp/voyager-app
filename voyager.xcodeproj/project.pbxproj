@@ -12,12 +12,14 @@
 		B12590EA28A3C49A0023E92B /* DepthK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12590E928A3C49A0023E92B /* DepthK.swift */; };
 		B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE83288FAA95003361A8 /* DepthSaver.swift */; };
 		B12BDE86288FB6CA003361A8 /* LoopClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE85288FB6CA003361A8 /* LoopClock.swift */; };
-		B12BDE882890F6B7003361A8 /* ARReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE872890F6B7003361A8 /* ARReceiver.swift */; };
+		B12BDE882890F6B7003361A8 /* ARController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE872890F6B7003361A8 /* ARController.swift */; };
 		B12BDE8A28910A3A003361A8 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE8928910A3A003361A8 /* Server.swift */; };
 		B12BDE8C2891131F003361A8 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDE8B2891131F003361A8 /* K.swift */; };
 		B12BDE8E28911369003361A8 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = B12BDE8D28911369003361A8 /* secrets.plist */; };
+		B15D815C28AF9D4400543647 /* 설입8출_야간.mov in Resources */ = {isa = PBXBuildFile; fileRef = B15D815B28AF9D4400543647 /* 설입8출_야간.mov */; };
 		B16F5EDB28A9FD28009A0F36 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B16F5EDA28A9FD28009A0F36 /* .swiftlint.yml */; };
 		B16F5EDD28AA6FEC009A0F36 /* AudioGuider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16F5EDC28AA6FEC009A0F36 /* AudioGuider.swift */; };
+		B1716D7F28D1C98E0010B568 /* CVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1716D7E28D1C98E0010B568 /* CVController.swift */; };
 		B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17761A0289A1407008AB52D /* ImageResizeExtension.swift */; };
 		B17761A3289B82F8008AB52D /* 롯데시네마앞_주간.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17761A2289B82F8008AB52D /* 롯데시네마앞_주간.mov */; };
 		B17761A5289B8ED7008AB52D /* 관악구청남쪽_주간.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17761A4289B8ED7008AB52D /* 관악구청남쪽_주간.mov */; };
@@ -34,18 +36,20 @@
 /* Begin PBXFileReference section */
 		62F392FD73744213AF29CE1B /* Pods_voyager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_voyager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A45C0A51F67BE2A04A408B5 /* Pods-voyager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-voyager.release.xcconfig"; path = "Target Support Files/Pods-voyager/Pods-voyager.release.xcconfig"; sourceTree = "<group>"; };
-		B107ED4B288116650071DE5E /* 0715 관정1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정1.mov"; sourceTree = "<group>"; };
-		B107ED4C288116650071DE5E /* 0715 관정2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "0715 관정2.mov"; sourceTree = "<group>"; };
 		B12590E728A3C4710023E92B /* DepthGuider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthGuider.swift; sourceTree = "<group>"; };
 		B12590E928A3C49A0023E92B /* DepthK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthK.swift; sourceTree = "<group>"; };
 		B12BDE83288FAA95003361A8 /* DepthSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthSaver.swift; sourceTree = "<group>"; };
 		B12BDE85288FB6CA003361A8 /* LoopClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopClock.swift; sourceTree = "<group>"; };
-		B12BDE872890F6B7003361A8 /* ARReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARReceiver.swift; sourceTree = "<group>"; };
+		B12BDE872890F6B7003361A8 /* ARController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARController.swift; sourceTree = "<group>"; };
 		B12BDE8928910A3A003361A8 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		B12BDE8B2891131F003361A8 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		B12BDE8D28911369003361A8 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
+		B15D815928AF9CD200543647 /* 센터앞_야간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "센터앞_야간.mov"; sourceTree = "<group>"; };
+		B15D815A28AF9CE600543647 /* 관악구청앞_주간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "관악구청앞_주간.mov"; sourceTree = "<group>"; };
+		B15D815B28AF9D4400543647 /* 설입8출_야간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "설입8출_야간.mov"; sourceTree = "<group>"; };
 		B16F5EDA28A9FD28009A0F36 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B16F5EDC28AA6FEC009A0F36 /* AudioGuider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioGuider.swift; sourceTree = "<group>"; };
+		B1716D7E28D1C98E0010B568 /* CVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVController.swift; sourceTree = "<group>"; };
 		B17761A0289A1407008AB52D /* ImageResizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizeExtension.swift; sourceTree = "<group>"; };
 		B17761A2289B82F8008AB52D /* 롯데시네마앞_주간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "롯데시네마앞_주간.mov"; sourceTree = "<group>"; };
 		B17761A4289B8ED7008AB52D /* 관악구청남쪽_주간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "관악구청남쪽_주간.mov"; sourceTree = "<group>"; };
@@ -77,11 +81,12 @@
 		B107ED4D28811BCC0071DE5E /* ReplayData */ = {
 			isa = PBXGroup;
 			children = (
+				B15D815928AF9CD200543647 /* 센터앞_야간.mov */,
+				B15D815B28AF9D4400543647 /* 설입8출_야간.mov */,
+				B15D815A28AF9CE600543647 /* 관악구청앞_주간.mov */,
 				B17761A6289BAF9D008AB52D /* 낙성대지구대_주간.mov */,
 				B17761A4289B8ED7008AB52D /* 관악구청남쪽_주간.mov */,
 				B17761A2289B82F8008AB52D /* 롯데시네마앞_주간.mov */,
-				B107ED4B288116650071DE5E /* 0715 관정1.mov */,
-				B107ED4C288116650071DE5E /* 0715 관정2.mov */,
 			);
 			path = ReplayData;
 			sourceTree = "<group>";
@@ -99,10 +104,11 @@
 		B108E7A028A0D462000B399D /* ARData */ = {
 			isa = PBXGroup;
 			children = (
-				B12BDE872890F6B7003361A8 /* ARReceiver.swift */,
+				B12BDE872890F6B7003361A8 /* ARController.swift */,
 				B12BDE83288FAA95003361A8 /* DepthSaver.swift */,
 				B12590E728A3C4710023E92B /* DepthGuider.swift */,
 				B12590E928A3C49A0023E92B /* DepthK.swift */,
+				B1716D7E28D1C98E0010B568 /* CVController.swift */,
 			);
 			path = ARData;
 			sourceTree = "<group>";
@@ -238,6 +244,7 @@
 				B17761A5289B8ED7008AB52D /* 관악구청남쪽_주간.mov in Resources */,
 				B17761A3289B82F8008AB52D /* 롯데시네마앞_주간.mov in Resources */,
 				B12BDE8E28911369003361A8 /* secrets.plist in Resources */,
+				B15D815C28AF9D4400543647 /* 설입8출_야간.mov in Resources */,
 				B1CF4416287FAE9B0002B733 /* LaunchScreen.storyboard in Resources */,
 				B17761A7289BAF9D008AB52D /* 낙성대지구대_주간.mov in Resources */,
 				B1CF4413287FAE9B0002B733 /* Assets.xcassets in Resources */,
@@ -312,10 +319,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1716D7F28D1C98E0010B568 /* CVController.swift in Sources */,
 				B17BF218289D5D1900CA7ABA /* ServerData.swift in Sources */,
 				B12BDE8A28910A3A003361A8 /* Server.swift in Sources */,
 				B1CF440E287FAE9A0002B733 /* ViewController.swift in Sources */,
-				B12BDE882890F6B7003361A8 /* ARReceiver.swift in Sources */,
+				B12BDE882890F6B7003361A8 /* ARController.swift in Sources */,
 				B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */,
 				B12BDE84288FAA95003361A8 /* DepthSaver.swift in Sources */,
 				B16F5EDD28AA6FEC009A0F36 /* AudioGuider.swift in Sources */,
