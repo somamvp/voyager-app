@@ -71,8 +71,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         ToastManager.shared.style = style
     }
     
-    func guide(_ string: String) {
-        self.view.makeToast(string, duration: 2.0, position: .center)
+    func guide(_ string: String, duration: Double = 2.0) {
+        self.view.makeToast(string, duration: duration, position: .center)
         audioGuider.speak(string: string)
     }
     
@@ -123,7 +123,7 @@ extension ViewController: ServerGuideDelegate {
     /// called when server recieves guidance from stateMachine
     func alertGuide(guide: [ServerGuideResponseRawData]) {
         if !guide.isEmpty {
-            self.guide(guide.joined(separator: "\n"))
+            self.guide(guide.joined(separator: "\n"), duration: 4.0)
         }
     }
     
@@ -178,7 +178,6 @@ extension ViewController: ARDataReceiver {
 //        imgView.image = UIImage(ciImage: depthImgCI.oriented(.right))
     }
 }
-
 
 extension ViewController: LoopClockDelegate {
     
