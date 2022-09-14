@@ -35,7 +35,7 @@ final class ARData {
 }
 
 // Configure and run an AR session to provide the app with depth-related AR data.
-final class ARReceiver: NSObject, ARSessionDelegate {
+final class ARController: NSObject, ARSessionDelegate {
     var arData = ARData()
     var arSession: ARSession!
     weak var delegate: ARDataReceiver?

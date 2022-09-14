@@ -21,7 +21,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     // AR data objects
     var arSession: ARSession!
-    var arReciever: ARReceiver!
+    var arReciever: ARController!
     var lastArData: ARData?
     var depthSaver: DepthSaver!
     
@@ -48,7 +48,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         
         arSession = sceneView.session
-        arReciever = ARReceiver(session: self.arSession)
+        arReciever = ARController(session: self.arSession)
         arReciever.delegate = self
         depthSaver = DepthSaver(session: self.arSession)
         
