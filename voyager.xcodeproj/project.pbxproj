@@ -19,7 +19,7 @@
 		B15D815C28AF9D4400543647 /* 설입8출_야간.mov in Resources */ = {isa = PBXBuildFile; fileRef = B15D815B28AF9D4400543647 /* 설입8출_야간.mov */; };
 		B16F5EDB28A9FD28009A0F36 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B16F5EDA28A9FD28009A0F36 /* .swiftlint.yml */; };
 		B16F5EDD28AA6FEC009A0F36 /* AudioGuider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16F5EDC28AA6FEC009A0F36 /* AudioGuider.swift */; };
-		B1716D7F28D1C98E0010B568 /* CVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1716D7E28D1C98E0010B568 /* CVController.swift */; };
+		B1716D7F28D1C98E0010B568 /* AVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1716D7E28D1C98E0010B568 /* AVController.swift */; };
 		B17761A1289A1407008AB52D /* ImageResizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17761A0289A1407008AB52D /* ImageResizeExtension.swift */; };
 		B17761A3289B82F8008AB52D /* 롯데시네마앞_주간.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17761A2289B82F8008AB52D /* 롯데시네마앞_주간.mov */; };
 		B17761A5289B8ED7008AB52D /* 관악구청남쪽_주간.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17761A4289B8ED7008AB52D /* 관악구청남쪽_주간.mov */; };
@@ -49,7 +49,7 @@
 		B15D815B28AF9D4400543647 /* 설입8출_야간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "설입8출_야간.mov"; sourceTree = "<group>"; };
 		B16F5EDA28A9FD28009A0F36 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B16F5EDC28AA6FEC009A0F36 /* AudioGuider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioGuider.swift; sourceTree = "<group>"; };
-		B1716D7E28D1C98E0010B568 /* CVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVController.swift; sourceTree = "<group>"; };
+		B1716D7E28D1C98E0010B568 /* AVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVController.swift; sourceTree = "<group>"; };
 		B17761A0289A1407008AB52D /* ImageResizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizeExtension.swift; sourceTree = "<group>"; };
 		B17761A2289B82F8008AB52D /* 롯데시네마앞_주간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "롯데시네마앞_주간.mov"; sourceTree = "<group>"; };
 		B17761A4289B8ED7008AB52D /* 관악구청남쪽_주간.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "관악구청남쪽_주간.mov"; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 				B12BDE83288FAA95003361A8 /* DepthSaver.swift */,
 				B12590E728A3C4710023E92B /* DepthGuider.swift */,
 				B12590E928A3C49A0023E92B /* DepthK.swift */,
-				B1716D7E28D1C98E0010B568 /* CVController.swift */,
+				B1716D7E28D1C98E0010B568 /* AVController.swift */,
 			);
 			path = ARData;
 			sourceTree = "<group>";
@@ -319,7 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1716D7F28D1C98E0010B568 /* CVController.swift in Sources */,
+				B1716D7F28D1C98E0010B568 /* AVController.swift in Sources */,
 				B17BF218289D5D1900CA7ABA /* ServerData.swift in Sources */,
 				B12BDE8A28910A3A003361A8 /* Server.swift in Sources */,
 				B1CF440E287FAE9A0002B733 /* ViewController.swift in Sources */,
