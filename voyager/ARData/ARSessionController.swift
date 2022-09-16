@@ -44,7 +44,6 @@ final class ARSessionController: NSObject, SessionController {
     override init() {
         super.init()
         arSession.delegate = self
-        start()
     }
     
     func createView() -> SceneView {

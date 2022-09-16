@@ -10,7 +10,7 @@ import SceneKit
 import ARKit
 import Toast_Swift
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet weak var guideStartStopButton: UIButton!
     var isGuiding = false
@@ -22,9 +22,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //    var arController: ARSessionController!
     var useAVCaptureSession = false
     var sessionController: SessionController!
-    lazy var sceneView: SceneView = {
-        return sessionController.createView()
-    }()
+    lazy var sceneView: SceneView = { self.sessionController.createView() }()
     var lastArData: ARData?
     var depthSaver: DepthSaver!
     
@@ -51,9 +49,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     override func loadView() {
+        super.loadView()
         
         if useAVCaptureSession {
-            //TODO
+            // TODO
         } else {
             sessionController = ARSessionController()
         }
@@ -67,7 +66,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         view.insertSubview(sceneView, at: 0)
         
-        //TODO
+        sessionController.start()
+        
+        // TODO
 //        depthSaver = DepthSaver(session: self.arSession)
         
         loopClock = LoopClock(fps: self.fps)
