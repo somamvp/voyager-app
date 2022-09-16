@@ -12,7 +12,7 @@ import Toast_Swift
 
 class ViewController: UIViewController, ARSCNViewDelegate {
     
-    @IBOutlet weak var sceneView: ARSCNView!
+    var sceneView = ARSCNView()
     
     @IBOutlet weak var guideStartStopButton: UIButton!
     var isGuiding = false
@@ -21,7 +21,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     // AR data objects
     var arSession: ARSession!
-    var arReciever: ARController!
+    var arController: ARController!
     var lastArData: ARData?
     var depthSaver: DepthSaver!
     
@@ -34,22 +34,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var audioGuider = AudioGuider()
     
+    override func updateViewConstraints() {
+        
+        super.updateViewConstraints()
+        
+        sceneView.translatesAutoresizingMaskIntoConstraints = false
+        view.addConstraints([
+            sceneView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sceneView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sceneView.topAnchor.constraint(equalTo: view.topAnchor),
+            sceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
     /// configure data & service objects.
     /// set delegates.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.insertSubview(sceneView, at: 0)
         
         guard ARWorldTrackingConfiguration.supportsFrameSemantics([.sceneDepth, .smoothedSceneDepth]) else {
             print("Unable to configure ARSession!")
             return
         }
         
-        // Set the view's delegate
-        sceneView.delegate = self
-        
         arSession = sceneView.session
-        arReciever = ARController(session: self.arSession)
-        arReciever.delegate = self
+        arController = ARController(session: self.arSession)
+        arController.delegate = self
         depthSaver = DepthSaver(session: self.arSession)
         
         loopClock = LoopClock(fps: self.fps)
