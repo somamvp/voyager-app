@@ -10,20 +10,16 @@ import SceneKit
 import ARKit
 import Toast_Swift
 
-class ViewController: UIViewController, ARSCNViewDelegate {
-    
-    @IBOutlet weak var sceneView: ARSCNView!
-    @IBOutlet weak var imgView: UIImageView!
+class ViewController: UIViewController {
     
     @IBOutlet weak var guideStartStopButton: UIButton!
     var isGuiding = false
     
-    var currentDepthMap: CVPixelBuffer?
-    
-    // AR data objects
-    var arSession: ARSession!
-    var arReciever: ARReceiver!
-    var lastArData: ARData?
+    // ARKit/AVFoundation data objects
+    var useAVCaptureSession = true
+    var sessionController: SessionController!
+    lazy var sceneView: SceneView = { sessionController.createView() }()
+    var lastCapturedData: CapturedData?
     var depthSaver: DepthSaver!
     
     let fps = 1
@@ -33,65 +29,93 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var depthGuider = DepthGuider()
     
+    var audioGuider = AudioGuider()
+    
     /// configure data & service objects.
     /// set delegates.
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard ARWorldTrackingConfiguration.supportsFrameSemantics([.sceneDepth, .smoothedSceneDepth]) else {
-            print("Unable to configure ARSession!")
-            return
+        if useAVCaptureSession {
+            sessionController = AVSessionController()
+        } else {
+            sessionController = ARSessionController()
         }
+        sessionController.delegate = self
         
-        // Set the view's delegate
-        sceneView.delegate = self
+        view.insertSubview(sceneView, at: 0)
         
-        arReciever = ARReceiver(session: sceneView.session)
-        arReciever.delegate = self
+        configureServices()
         
-        self.arSession = sceneView.session
-        self.depthSaver = DepthSaver(session: self.arSession)
+        sessionController.start()
+    }
+    
+    func configureServices() {
         
-        self.loopClock = LoopClock(fps: self.fps)
+        // TODO
+        //        depthSaver = DepthSaver(session: self.arSession)
+        
+        // set LoopClock for repeating clock services
+        loopClock = LoopClock(fps: self.fps)
         loopClock.delegate = self
         
+        // set Server for backend networking
         server = Server(viewController: self)
+        
+        // set AVAudioSession for speaker sound output
+        // https://stackoverflow.com/questions/69427369/avspeechsynthesizer-plays-sound-with-phone-call-speaker-instead-of-bottom-speake
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .voicePrompt, options: [])
+        
+        // set toast message config
+        var style = ToastStyle()
+        style.messageFont = .systemFont(ofSize: 18)
+        ToastManager.shared.style = style
+    }
+    
+    override func updateViewConstraints() {
+        
+        super.updateViewConstraints()
+        
+        sceneView.translatesAutoresizingMaskIntoConstraints = false
+        view.addConstraints([
+            sceneView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sceneView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sceneView.topAnchor.constraint(equalTo: view.topAnchor),
+            sceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Pause the view's session
-        sceneView.session.pause()
+        sessionController.stop()
+    }
+        
+    func guide(_ string: String, duration: Double = 2.0) {
+        self.view.makeToast(string, duration: duration, position: .center)
+        audioGuider.speak(string: string)
     }
     
     @IBAction func handleCaptureButton(_ sender: Any) {
-//        do {
-//            try depthSaver.saveDepthToCilpBoard()
-//            self.view.makeToast("LiDAR Sensor data copied to clipboard!")
-//        } catch {
-//            self.view.makeToast("Unable to retrieve LiDAR Sensor data!")
-//        }
-
-        if let depthImage = lastArData?.depthSmoothImage {
+        if let depthImage = lastCapturedData?.depthSmoothImage {
             let landscapeGuide = depthGuider.detectLandscape(depthImage: depthImage)
             switch landscapeGuide {
             case .cliff(let distance):
-                self.view.makeToast(String(format: "추락지형! %.2f 미터", distance))
+                guide(String(format: "%.1f 미터 앞에 추락지형이 있습니다", distance))
             case .wall(let distance):
-                self.view.makeToast(String(format: "전방 장애물! %.2f 미터", distance))
+                guide(String(format: "%.1f 미터 앞에 장애물이 있습니다", distance))
             default:
-                self.view.makeToast("지형 정상!")
+                guide("지형이 정상입니다")
             }
             
         }
-        displayDepthImage()
     }
     
     @IBAction func handleStartStopButton(_ sender: UIButton) {
         guideStartStopButton.isEnabled = false
         
-        if (!isGuiding) {
+        if !isGuiding {
             requestStartGuiding()
         } else {
             requestStopGuiding()
@@ -99,7 +123,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func updateStartStopButton() {
-        if (isGuiding) {
+        if isGuiding {
             guideStartStopButton.setTitle(K.stopButtonText, for: .normal)
         } else {
             guideStartStopButton.setTitle(K.startButtonText, for: .normal)
@@ -112,8 +136,8 @@ extension ViewController: ServerGuideDelegate {
     
     /// called when server recieves guidance from stateMachine
     func alertGuide(guide: [ServerGuideResponseRawData]) {
-        if (!guide.isEmpty) {
-            self.view.makeToast(guide.joined(separator: "\n"))
+        if !guide.isEmpty {
+            self.guide(guide.joined(separator: "\n"), duration: 4.0)
         }
     }
     
@@ -124,7 +148,7 @@ extension ViewController: ServerGuideDelegate {
     
     /// delegate method; called by server when server acknowledges `requestStartGuiding()`
     func startGuiding() {
-        self.alertGuide(guide: ["starting guide!"])
+        self.alertGuide(guide: ["보행 안내를 시작합니다."])
         
         isGuiding = true
         updateStartStopButton()
@@ -138,10 +162,9 @@ extension ViewController: ServerGuideDelegate {
         server.stop()
     }
     
-    
     /// delegate method; called by server when server acknowledges `requestStopGuiding()`
     func stopGuiding() {
-        self.alertGuide(guide: ["stopping guide!"])
+        self.alertGuide(guide: ["보행 안내를 종료합니다."])
         
         isGuiding = false
         updateStartStopButton()
@@ -152,21 +175,26 @@ extension ViewController: ServerGuideDelegate {
     
 }
 
-extension ViewController: ARDataReceiver {
+extension ViewController: SessionDataReceiver {
     
-    /// called when AR data is updated
-    func onNewARData(arData: ARData) {
-        lastArData = arData
+    /// called when AR/AV data is updated
+    func onNewData(capturedData: CapturedData) {
+        lastCapturedData = capturedData
+//        displayDepthImage()
+    }
+    
+    func onNewPhotoData(capturedData: CapturedData) {
+        lastCapturedData = capturedData
 //        displayDepthImage()
     }
     
     func displayDepthImage() {
         
-        guard let currentDepthMap = lastArData?.depthSmoothImage else { return }
+        guard let currentDepthMap = lastCapturedData?.depthSmoothImage else { return }
         
         let depthImgCI = CIImage(cvPixelBuffer: currentDepthMap)
         
-        imgView.image = UIImage(ciImage: depthImgCI.oriented(.right))
+//        imgView.image = UIImage(ciImage: depthImgCI.oriented(.right))
     }
 }
 
@@ -180,7 +208,7 @@ extension ViewController: LoopClockDelegate {
     
     func sendRGBImage(sequenceNo: Int = 0) {
         
-        if let img = lastArData?.colorImage {
+        if let img = lastCapturedData?.colorImage {
             let uploadData = ServerImageUploadData(sequenceNo: sequenceNo, image: img)
             server.send(imgData: uploadData)
         } else {
@@ -188,4 +216,3 @@ extension ViewController: LoopClockDelegate {
         }
     }
 }
-

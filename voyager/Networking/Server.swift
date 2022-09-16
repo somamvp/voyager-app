@@ -45,7 +45,7 @@ class Server {
     }
     
     func start() {
-        print("starting server")
+        print("sending start request to server")
         _ = AF.request(serverStartURI!, method: .get).response { [weak self] response in
             if case .failure = response.result {
                 print(response.debugDescription)
@@ -67,10 +67,10 @@ class Server {
             to: serverImageUploadURI!
         ).responseDecodable(of: [ServerGuideResponseRawData].self) { [weak self] response in
             print("response recieved: \(response)")
-            if case .failure = response.result {
-                print(response.debugDescription)
+            if case .success(let data) = response.result {
+                self?.guider.alertGuide(guide: data)
             } else {
-                self?.guider.alertGuide(guide: try! response.result.get())
+                print(response.debugDescription)
             }
         }
         

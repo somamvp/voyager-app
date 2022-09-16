@@ -10,17 +10,20 @@ import CoreImage
 
 /// 서버에 이미지 업로드 request 시 사용하는 중간 객체.
 struct ServerImageUploadData {
-    static var compressionQuality = 0.5
-    static var targetSize = CGSize(width: 160, height: 320)
+    static var compressionQuality = 0.75
+    static var targetSize = CGSize(width: 480, height: 640)
     
     var filename = "test.jpg"
     var sequenceNo = 0
     var image: CVPixelBuffer
     var imageData: Data? {
         let ciImage = CIImage(cvPixelBuffer: image).oriented(.right)
-        let scaledUIImage = UIImage(ciImage: ciImage).scalePreservingAspectRatio(targetSize: ServerImageUploadData.targetSize)
         
-        return scaledUIImage.jpegData(compressionQuality: ServerImageUploadData.compressionQuality)
+        let uiImage = UIImage(ciImage: ciImage, scale: 1, orientation: .up)
+        
+        return uiImage.jpegDataWithScalePreservingAspectRatio(
+            compressionQuality: ServerImageUploadData.compressionQuality,
+            targetSize: ServerImageUploadData.targetSize)
     }
 }
 

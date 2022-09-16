@@ -16,17 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="c3j-nb-pDV">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
-                                <subviews>
-                                    <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thz-SV-j0d">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="431"/>
-                                    </arscnView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BZD-sR-NcW">
-                                        <rect key="frame" x="0.0" y="431" width="414" height="431"/>
-                                    </imageView>
-                                </subviews>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEx-ev-x33">
                                 <rect key="frame" x="148" y="798" width="118.5" height="44"/>
                                 <state key="normal" title="Button"/>
@@ -51,20 +40,14 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="c3j-nb-pDV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4oW-F3-yNY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JEx-ev-x33" secondAttribute="bottom" constant="20" id="9po-KU-Ucq"/>
                             <constraint firstItem="JEx-ev-x33" firstAttribute="top" secondItem="gck-6A-PSF" secondAttribute="bottom" constant="10" id="Bmy-Jl-TKP"/>
-                            <constraint firstItem="c3j-nb-pDV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lfp-w7-6jh"/>
                             <constraint firstItem="gck-6A-PSF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rkJ-BR-qtx"/>
                             <constraint firstItem="JEx-ev-x33" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="u7E-ZQ-AYR"/>
-                            <constraint firstItem="c3j-nb-pDV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uiB-fN-aQo"/>
-                            <constraint firstItem="c3j-nb-pDV" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="wZP-P4-eqW"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="guideStartStopButton" destination="gck-6A-PSF" id="In2-33-u1F"/>
-                        <outlet property="imgView" destination="BZD-sR-NcW" id="f0l-51-jV5"/>
-                        <outlet property="sceneView" destination="thz-SV-j0d" id="QlW-jX-UR2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
