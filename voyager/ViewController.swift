@@ -22,7 +22,7 @@ class ViewController: UIViewController {
 //    var arController: ARSessionController!
     var useAVCaptureSession = false
     var sessionController: SessionController!
-    lazy var sceneView: SceneView = { self.sessionController.createView() }()
+    lazy var sceneView: SceneView = { sessionController.createView() }()
     var lastArData: ARData?
     var depthSaver: DepthSaver!
     
@@ -34,6 +34,46 @@ class ViewController: UIViewController {
     var depthGuider = DepthGuider()
     
     var audioGuider = AudioGuider()
+    /// configure data & service objects.
+    /// set delegates.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if useAVCaptureSession {
+            // TODO
+        } else {
+            sessionController = ARSessionController()
+        }
+        sessionController.delegate = self
+        
+        view.insertSubview(sceneView, at: 0)
+        
+        configureServices()
+        
+        sessionController.start()
+    }
+    
+    func configureServices() {
+        
+        // TODO
+        //        depthSaver = DepthSaver(session: self.arSession)
+        
+        // set LoopClock for repeating clock services
+        loopClock = LoopClock(fps: self.fps)
+        loopClock.delegate = self
+        
+        // set Server for backend networking
+        server = Server(viewController: self)
+        
+        // set AVAudioSession for speaker sound output
+        // https://stackoverflow.com/questions/69427369/avspeechsynthesizer-plays-sound-with-phone-call-speaker-instead-of-bottom-speake
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .voicePrompt, options: [])
+        
+        // set toast message config
+        var style = ToastStyle()
+        style.messageFont = .systemFont(ofSize: 18)
+        ToastManager.shared.style = style
+    }
     
     override func updateViewConstraints() {
         
@@ -48,58 +88,16 @@ class ViewController: UIViewController {
         ])
     }
     
-    override func loadView() {
-        super.loadView()
-        
-        if useAVCaptureSession {
-            // TODO
-        } else {
-            sessionController = ARSessionController()
-        }
-        sessionController.delegate = self
-    }
-    
-    /// configure data & service objects.
-    /// set delegates.
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.insertSubview(sceneView, at: 0)
-        
-        sessionController.start()
-        
-        // TODO
-//        depthSaver = DepthSaver(session: self.arSession)
-        
-        loopClock = LoopClock(fps: self.fps)
-        loopClock.delegate = self
-        
-        server = Server(viewController: self)
-        
-        configureGuider()
-    }
-    
-    func configureGuider() {
-        // set AVAudioSession for speaker sound output
-        // https://stackoverflow.com/questions/69427369/avspeechsynthesizer-plays-sound-with-phone-call-speaker-instead-of-bottom-speake
-        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .voicePrompt, options: [])
-        
-        var style = ToastStyle()
-        style.messageFont = .systemFont(ofSize: 18)
-        
-        ToastManager.shared.style = style
-    }
-    
-    func guide(_ string: String, duration: Double = 2.0) {
-        self.view.makeToast(string, duration: duration, position: .center)
-        audioGuider.speak(string: string)
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Pause the view's session
         sessionController.stop()
+    }
+        
+    func guide(_ string: String, duration: Double = 2.0) {
+        self.view.makeToast(string, duration: duration, position: .center)
+        audioGuider.speak(string: string)
     }
     
     @IBAction func handleCaptureButton(_ sender: Any) {
