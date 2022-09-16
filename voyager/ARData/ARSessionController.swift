@@ -12,33 +12,13 @@
  A utility class that receives processed depth information.
  */
 
-import Foundation
-import SwiftUI
-import Combine
 import ARKit
-
-// Receive the newest AR data from an `ARReceiver`.
-protocol ARDataReceiver: AnyObject {
-    func onNewARData(arData: ARData)
-}
-
-// - Tag: ARData
-// Store depth-related AR data.
-final class ARData {
-    var depthImage: CVPixelBuffer?
-    var depthSmoothImage: CVPixelBuffer?
-    var colorImage: CVPixelBuffer?
-    var confidenceImage: CVPixelBuffer?
-    var confidenceSmoothImage: CVPixelBuffer?
-    var cameraIntrinsics = simd_float3x3()
-    var cameraResolution = CGSize()
-}
 
 // Configure and run an AR session to provide the app with depth-related AR data.
 final class ARSessionController: NSObject, SessionController {
-    var arData = ARData()
+    var arData = CapturedData()
     var arSession = ARSession()
-    weak var delegate: ARDataReceiver?
+    weak var delegate: SessionDataReceiver?
     
     // Configure and start the ARSession.
     override init() {
@@ -79,7 +59,7 @@ extension ARSessionController: ARSessionDelegate {
             arData.colorImage = frame.capturedImage
             arData.cameraIntrinsics = frame.camera.intrinsics
             arData.cameraResolution = frame.camera.imageResolution
-            delegate?.onNewARData(arData: arData)
+            delegate?.onNewData(capturedData: arData)
         }
     }
 }

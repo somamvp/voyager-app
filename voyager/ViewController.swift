@@ -15,15 +15,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var guideStartStopButton: UIButton!
     var isGuiding = false
     
-    var currentDepthMap: CVPixelBuffer?
-    
-    // AR data objects
-//    var arSession: ARSession!
-//    var arController: ARSessionController!
-    var useAVCaptureSession = false
+    // ARKit/AVFoundation data objects
+    var useAVCaptureSession = true
     var sessionController: SessionController!
     lazy var sceneView: SceneView = { sessionController.createView() }()
-    var lastArData: ARData?
+    var lastCapturedData: CapturedData?
     var depthSaver: DepthSaver!
     
     let fps = 1
@@ -34,13 +30,14 @@ class ViewController: UIViewController {
     var depthGuider = DepthGuider()
     
     var audioGuider = AudioGuider()
+    
     /// configure data & service objects.
     /// set delegates.
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if useAVCaptureSession {
-            // TODO
+            sessionController = AVSessionController()
         } else {
             sessionController = ARSessionController()
         }
@@ -101,7 +98,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func handleCaptureButton(_ sender: Any) {
-        if let depthImage = lastArData?.depthSmoothImage {
+        if let depthImage = lastCapturedData?.depthSmoothImage {
             let landscapeGuide = depthGuider.detectLandscape(depthImage: depthImage)
             switch landscapeGuide {
             case .cliff(let distance):
@@ -178,17 +175,22 @@ extension ViewController: ServerGuideDelegate {
     
 }
 
-extension ViewController: ARDataReceiver {
+extension ViewController: SessionDataReceiver {
     
-    /// called when AR data is updated
-    func onNewARData(arData: ARData) {
-        lastArData = arData
+    /// called when AR/AV data is updated
+    func onNewData(capturedData: CapturedData) {
+        lastCapturedData = capturedData
+//        displayDepthImage()
+    }
+    
+    func onNewPhotoData(capturedData: CapturedData) {
+        lastCapturedData = capturedData
 //        displayDepthImage()
     }
     
     func displayDepthImage() {
         
-        guard let currentDepthMap = lastArData?.depthSmoothImage else { return }
+        guard let currentDepthMap = lastCapturedData?.depthSmoothImage else { return }
         
         let depthImgCI = CIImage(cvPixelBuffer: currentDepthMap)
         
@@ -206,7 +208,7 @@ extension ViewController: LoopClockDelegate {
     
     func sendRGBImage(sequenceNo: Int = 0) {
         
-        if let img = lastArData?.colorImage {
+        if let img = lastCapturedData?.colorImage {
             let uploadData = ServerImageUploadData(sequenceNo: sequenceNo, image: img)
             server.send(imgData: uploadData)
         } else {
