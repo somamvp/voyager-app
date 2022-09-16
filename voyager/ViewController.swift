@@ -12,16 +12,19 @@ import Toast_Swift
 
 class ViewController: UIViewController, ARSCNViewDelegate {
     
-    var sceneView = ARSCNView()
-    
     @IBOutlet weak var guideStartStopButton: UIButton!
     var isGuiding = false
     
     var currentDepthMap: CVPixelBuffer?
     
     // AR data objects
-    var arSession: ARSession!
-    var arController: ARController!
+//    var arSession: ARSession!
+//    var arController: ARSessionController!
+    var useAVCaptureSession = false
+    var sessionController: SessionController!
+    lazy var sceneView: SceneView = {
+        return sessionController.createView()
+    }()
     var lastArData: ARData?
     var depthSaver: DepthSaver!
     
@@ -47,6 +50,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         ])
     }
     
+    override func loadView() {
+        
+        if useAVCaptureSession {
+            //TODO
+        } else {
+            sessionController = ARSessionController()
+        }
+        sessionController.delegate = self
+    }
+    
     /// configure data & service objects.
     /// set delegates.
     override func viewDidLoad() {
@@ -54,15 +67,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         view.insertSubview(sceneView, at: 0)
         
-        guard ARWorldTrackingConfiguration.supportsFrameSemantics([.sceneDepth, .smoothedSceneDepth]) else {
-            print("Unable to configure ARSession!")
-            return
-        }
-        
-        arSession = sceneView.session
-        arController = ARController(session: self.arSession)
-        arController.delegate = self
-        depthSaver = DepthSaver(session: self.arSession)
+        //TODO
+//        depthSaver = DepthSaver(session: self.arSession)
         
         loopClock = LoopClock(fps: self.fps)
         loopClock.delegate = self
@@ -92,7 +98,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillDisappear(animated)
         
         // Pause the view's session
-        sceneView.session.pause()
+        sessionController.stop()
     }
     
     @IBAction func handleCaptureButton(_ sender: Any) {

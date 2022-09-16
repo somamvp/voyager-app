@@ -35,17 +35,22 @@ final class ARData {
 }
 
 // Configure and run an AR session to provide the app with depth-related AR data.
-final class ARController: NSObject, ARSessionDelegate {
+final class ARSessionController: NSObject, SessionController {
     var arData = ARData()
-    var arSession: ARSession!
+    var arSession = ARSession()
     weak var delegate: ARDataReceiver?
     
     // Configure and start the ARSession.
-    init(session: ARSession) {
+    override init() {
         super.init()
-        arSession = session
         arSession.delegate = self
         start()
+    }
+    
+    func createView() -> SceneView {
+        let view = ARSCNView()
+        view.session = arSession
+        return view
     }
     
     // Configure the ARKit session.
@@ -57,9 +62,13 @@ final class ARController: NSObject, ARSessionDelegate {
         arSession.run(config)
     }
     
-    func pause() {
+    func stop() {
         arSession.pause()
     }
+    
+}
+
+extension ARSessionController: ARSessionDelegate {
     
     // Send required data from `ARFrame` to the delegate class via the `onNewARData` callback.
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
