@@ -10,8 +10,8 @@ import AVFoundation
 import CoreImage
 
 protocol AVDataReceiver: AnyObject {
-    func onNewData(capturedData: CameraCapturedData)
-    func onNewPhotoData(capturedData: CameraCapturedData)
+    func onNewData(capturedData: ARData)
+    func onNewPhotoData(capturedData: ARData)
 }
 
 class AVController: NSObject, ObservableObject {
@@ -27,6 +27,8 @@ class AVController: NSObject, ObservableObject {
     
     private(set) var captureSession: AVCaptureSession!
     
+    var arData = ARData()
+    
     private var photoOutput: AVCapturePhotoOutput!
     private var depthDataOutput: AVCaptureDepthDataOutput!
     private var videoDataOutput: AVCaptureVideoDataOutput!
@@ -34,7 +36,7 @@ class AVController: NSObject, ObservableObject {
     
     private var textureCache: CVMetalTextureCache!
     
-    weak var delegate: CaptureDataReceiver?
+    weak var delegate: AVDataReceiver?
     
     var isFilteringEnabled = true {
         didSet {
@@ -43,13 +45,6 @@ class AVController: NSObject, ObservableObject {
     }
     
     override init() {
-        
-        // Create a texture cache to hold sample buffer textures.
-        CVMetalTextureCacheCreate(kCFAllocatorDefault,
-                                  nil,
-                                  MetalEnvironment.shared.metalDevice,
-                                  nil,
-                                  &textureCache)
         
         super.init()
         
@@ -178,14 +173,12 @@ extension AVController: AVCaptureDataOutputSynchronizerDelegate {
         guard let pixelBuffer = syncedVideoData.sampleBuffer.imageBuffer,
               let cameraCalibrationData = syncedDepthData.depthData.cameraCalibrationData else { return }
         
-        // Package the captured data.
-        let data = CameraCapturedData(depth: syncedDepthData.depthData.depthDataMap.texture(withFormat: .r16Float, planeIndex: 0, addToCache: textureCache),
-                                      colorY: pixelBuffer.texture(withFormat: .r8Unorm, planeIndex: 0, addToCache: textureCache),
-                                      colorCbCr: pixelBuffer.texture(withFormat: .rg8Unorm, planeIndex: 1, addToCache: textureCache),
-                                      cameraIntrinsics: cameraCalibrationData.intrinsicMatrix,
-                                      cameraReferenceDimensions: cameraCalibrationData.intrinsicMatrixReferenceDimensions)
+        arData.depthSmoothImage = syncedDepthData.depthData.depthDataMap
+        arData.colorImage = pixelBuffer
+        arData.cameraIntrinsics = cameraCalibrationData.intrinsicMatrix
+        arData.cameraResolution = cameraCalibrationData.intrinsicMatrixReferenceDimensions
         
-        delegate?.onNewData(capturedData: data)
+        delegate?.onNewData(capturedData: arData)
     }
 }
 
@@ -220,13 +213,10 @@ extension AVController: AVCapturePhotoCaptureDelegate {
         // Convert the depth data to the expected format.
         let convertedDepth = depthData.converting(toDepthDataType: kCVPixelFormatType_DepthFloat16)
         
-        // Package the captured data.
-        let data = CameraCapturedData(depth: convertedDepth.depthDataMap.texture(withFormat: .r16Float, planeIndex: 0, addToCache: textureCache),
-                                      colorY: pixelBuffer.texture(withFormat: .r8Unorm, planeIndex: 0, addToCache: textureCache),
-                                      colorCbCr: pixelBuffer.texture(withFormat: .rg8Unorm, planeIndex: 1, addToCache: textureCache),
-                                      cameraIntrinsics: cameraCalibrationData.intrinsicMatrix,
-                                      cameraReferenceDimensions: cameraCalibrationData.intrinsicMatrixReferenceDimensions)
+        arData.depthSmoothImage = convertedDepth.depthDataMap
+        arData.colorImage = pixelBuffer
+        arData.cameraIntrinsics = cameraCalibrationData.intrinsicMatrix
+        arData.cameraResolution = cameraCalibrationData.intrinsicMatrixReferenceDimensions
         
-        delegate?.onNewPhotoData(capturedData: data)
     }
 }

@@ -105,10 +105,10 @@
 			isa = PBXGroup;
 			children = (
 				B12BDE872890F6B7003361A8 /* ARController.swift */,
+				B1716D7E28D1C98E0010B568 /* AVController.swift */,
 				B12BDE83288FAA95003361A8 /* DepthSaver.swift */,
 				B12590E728A3C4710023E92B /* DepthGuider.swift */,
 				B12590E928A3C49A0023E92B /* DepthK.swift */,
-				B1716D7E28D1C98E0010B568 /* AVController.swift */,
 			);
 			path = ARData;
 			sourceTree = "<group>";
